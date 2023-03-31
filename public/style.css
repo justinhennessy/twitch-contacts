@@ -1,0 +1,38 @@
+.person-container {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.sphere {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 20px;
+    background-color: #1e90ff;
+    position: relative; /* Add position: relative for hover modal positioning */
+}
+
+.details {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+/* Add CSS for hover modal */
+.hover-modal {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    display: none;
+}
+
+.sphere:hover .hover-modal {
+    display: block;
+}

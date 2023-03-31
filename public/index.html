@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <style>
+        .person-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* .sphere {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: inline-block;
+            font-size: 20px;
+            background-color: #1e90ff;
+            position: relative;
+        } */
+
+        .sphere {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            /* display: inline-block; */
+            font-size: 20px;
+            /* background-image: radial-gradient(circle at center, #f06, transparent); */
+            position: relative;
+            animation: spin 2s linear infinite;
+        }
+
+        .sphere {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: inline-block;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .sphere::before {
+            content: "";
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, #87CEFA 0%, #1E90FF 50%);
+        }
+
+        .sphere::after {
+            content: "";
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+        }
+
+        .details {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        /* Add CSS for hover modal */
+        .hover-modal {
+            position: absolute;
+            top: 110%;
+            left: 0;
+            z-index: 1;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid black;
+            padding: 10px;
+            display: none;
+            width: 300px;
+            text-align: left;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            opacity: 0.9;
+        }
+
+        .rounded {
+            border-radius: 10px;
+        }
+
+        .sphere:hover .hover-modal {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contact-list"></div>
+    <script>
+        class Person {
+            constructor(username, realName, notes = [], message_count = 0) {
+                this.username = username;
+                this.realName = realName;
+                this.message_count = message_count
+                this.notes = notes;
+            }
+        }
+
+        let people = [
+            new Person('JustinHennessy', 'Justin'),
+            new Person('Nightbot', '', ['Doing year 12', 'Working on a career in Counter Strike GO', 'Doing math and physics', 'He asked me to do something with Wallows - Remember When']),
+            new Person('Christian12wg', ''),
+            new Person('allistair10', 'Eden'),
+            new Person('user5', ''),
+            new Person('SonglistBot', '')
+        ];
+
+        people = people.sort((a, b) => {
+            if (a.username < b.username) {
+                return -1;
+            }
+            if (a.username > b.username) {
+                return 1;
+            }
+            return 0;
+        });
+
+        const contactList = document.getElementById('contact-list');
+        let chatters = {}
+
+        function fetchMessageCounts() {
+            fetch('/message_count')
+                .then(res => res.json())
+                .then(data => {
+                    chatters = data;
+                    console.log(chatters)
+                    displayContacts(chatters);
+                });
+        }
+
+        function getColorBasedOnMessageCount(message_count) {
+            if (message_count < 10) {
+                return { color: 'lightblue', spin: false };
+            } else if (message_count >= 10 && message_count < 25) {
+                return { color: 'lightgreen', spin: true };
+            } else if (message_count >= 25 && message_count < 50) {
+                return { color: 'orange', spin: true };
+            } else if (message_count >= 50 && message_count < 100) {
+                return { color: 'lightcoral', spin: true };
+            } else {
+                return { color: 'red', spin: true };
+            }
+        }
+
+        function calculateSphereSize(message_count) {
+            const baseSize = 50;
+            const maxSize = 200;
+            const sizeFactor = 0.2;
+
+            let newSize = baseSize + (message_count / sizeFactor);
+
+            if (newSize > maxSize) {
+                newSize = maxSize;
+            }
+
+            return newSize;
+        }
+
+        function displayContacts(chatters) {
+            contactList.innerHTML = '';
+
+            for (const person of people) {
+                const username = person.username;
+                if (chatters.hasOwnProperty(username)) {
+                    person.message_count = chatters[username];
+                }
+            }
+
+            people.filter(person => chatters.hasOwnProperty(person.username))
+                .forEach(person => {
+                    const personContainer = document.createElement('div');
+                    const sphere = document.createElement('div');
+                    const details = document.createElement('div');
+                    const username = document.createElement('p');
+                    const hoverModal = document.createElement('div'); // Add hover modal element
+
+                    personContainer.className = 'person-container';
+                    sphere.className = 'sphere';
+                    details.className = 'details';
+                    hoverModal.className = 'hover-modal rounded'; // Add class name to hover modal
+
+                    username.innerText = `${person.username}\n`;
+                    hoverModal.innerText = `RealName: ${person.realName}\n\nNotes:\n${person.notes.join('\n')}`;
+
+                    details.appendChild(username);
+                    personContainer.appendChild(sphere);
+                    sphere.appendChild(hoverModal); // Add hover modal to sphere element
+                    personContainer.appendChild(details); // Add details after sphere
+                    contactList.appendChild(personContainer);
+
+                    const animationWrapper = document.createElement('div');
+                    animationWrapper.className = 'animation-wrapper';
+                    sphere.appendChild(animationWrapper);
+
+                    const newSize = calculateSphereSize(person.message_count);
+                    sphere.style.width = newSize + "px";
+                    sphere.style.height = newSize + "px";
+
+                    const colorInfo = getColorBasedOnMessageCount(person.message_count);
+                    sphere.style.backgroundColor = colorInfo.color;
+
+                    const messageCount = document.createElement('span');
+                    messageCount.textContent = person.message_count;
+                    messageCount.style.position = 'absolute';
+                    messageCount.style.top = '50%';
+                    messageCount.style.left = '50%';
+                    messageCount.style.transform = 'translate(-50%, -50%)';
+                    sphere.appendChild(messageCount);
+
+                    details.style.display = 'flex';
+                    details.style.flexDirection = 'column';
+                });
+        }
+
+        fetchMessageCounts();
+
+        setInterval(fetchMessageCounts, 10000);
+    </script>
+</body>
+
+</html>
