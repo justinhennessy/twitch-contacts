@@ -37,8 +37,6 @@ function onMessageHandler(target, context, msg, self) {
   } else {
     message_count[chatter] = 1;
   }
-
-  console.log(message_count);
 }
 
 // Called every time the bot connects to Twitch chat

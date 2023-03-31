@@ -45,8 +45,6 @@ function onMessageHandler(target, context, msg, self) {
     } else {
         message_count[chatter] = 1;
     }
-      
-    console.log(message_count);
     }
 
 const server = http.createServer((req, res) => {
@@ -63,11 +61,6 @@ const server = http.createServer((req, res) => {
       res.end(data);
     });
   }
-
-  // let message_count = {
-  //  JustinHennessy: 3,
-  //  allistair10: 1
-  // };
 
   // Expose message_count as a JSON endpoint
   if (req.url === '/message_count') {

@@ -49,9 +49,10 @@
     <div id="contact-list"></div>
     <script>
         class Person {
-            constructor(username, realName, notes) {
+            constructor(username, realName, notes, message_count=0) {
                 this.username = username;
                 this.realName = realName;
+                this.message_count = message_count
                 this.notes = notes;
             }
         }
@@ -72,11 +73,20 @@
             .then(data => {
             
             chatters = data
+            console.log(chatters)
             displayContacts(chatters);
         })
 
         function displayContacts(chatters) {
             console.log(chatters)
+
+            for (const person of people) {
+                const username = person.username;
+                if (chatters.hasOwnProperty(username)) {
+                  person.message_count = chatters[username];
+                }
+              }
+            console.log(people)
             people.filter(person => chatters.hasOwnProperty(person.username))
                 .forEach(person => {
                 const personContainer = document.createElement('div');
@@ -95,14 +105,25 @@
                 hoverModal.innerText = `${person.realName} - ${person.notes}`; // Set text for hover modal
           
                 details.appendChild(username);
-                personContainer.appendChild(details);
                 personContainer.appendChild(sphere);
                 sphere.appendChild(hoverModal); // Add hover modal to sphere element
+                personContainer.appendChild(details); // Add details after sphere
                 contactList.appendChild(personContainer);
+                
+                // Update CSS styles
+                sphere.style.position = 'relative';
+                sphere.style.display = 'flex';
+                sphere.style.alignItems = 'center';
+                sphere.style.justifyContent = 'center';
+                sphere.style.width = '50px';
+                sphere.style.height = '50px';
+                sphere.style.borderRadius = '50%';
+                sphere.style.backgroundColor = '#0f0f0f';
+                details.style.display = 'flex';
+                details.style.flexDirection = 'column';
+                details.style.alignItems = 'center';
             });
-          }
-
-        console.log(people)
+        }
     </script>
 </body>
 </html>
