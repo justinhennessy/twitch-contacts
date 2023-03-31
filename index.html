@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <style>
+        .person-container {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .sphere {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: inline-block;
+            font-size: 20px;
+            background-color: #1e90ff;
+            position: relative; /* Add position: relative for hover modal positioning */
+        }
+
+        .details {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        /* Add CSS for hover modal */
+        .hover-modal {
+            position: absolute;
+            top: 110%;
+            left: 0;
+            z-index: 1;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            display: none;
+        }
+
+        .sphere:hover .hover-modal {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="contact-list"></div>
+    <script>
+        class Person {
+            constructor(username, realName, notes) {
+                this.username = username;
+                this.realName = realName;
+                this.notes = notes;
+            }
+        }
+
+        const people = [
+            new Person('JustinHennessy', 'John Doe', 'Friend from college'),
+            new Person('SonglistBot', 'Jane Smith', 'Work colleague'),
+            new Person('Nightbot', 'Michael Brown', 'Neighbor'),
+            new Person('user4', 'Emily Davis', 'Gym buddy'),
+            new Person('user5', 'James Wilson', 'Cousin'),
+        ];
+
+        const contactList = document.getElementById('contact-list');
+        let chatters = {}
+
+        fetch('/message_count')
+            .then(res => res.json())
+            .then(data => {
+            
+            chatters = data
+            displayContacts(chatters);
+        })
+
+        function displayContacts(chatters) {
+            console.log(chatters)
+            people.filter(person => chatters.hasOwnProperty(person.username))
+                .forEach(person => {
+                const personContainer = document.createElement('div');
+                const sphere = document.createElement('div');
+                const details = document.createElement('div');
+                const username = document.createElement('p');
+                const hoverModal = document.createElement('div'); // Add hover modal element
+          
+                personContainer.className = 'person-container';
+                sphere.className = 'sphere';
+                details.className = 'details';
+                hoverModal.className = 'hover-modal'; // Add class name to hover modal
+          
+                sphere.innerText = person.username.charAt(0).toUpperCase();
+                username.innerText = person.username;
+                hoverModal.innerText = `${person.realName} - ${person.notes}`; // Set text for hover modal
+          
+                details.appendChild(username);
+                personContainer.appendChild(details);
+                personContainer.appendChild(sphere);
+                sphere.appendChild(hoverModal); // Add hover modal to sphere element
+                contactList.appendChild(personContainer);
+            });
+          }
+
+        console.log(people)
+    </script>
+</body>
+</html>
+
