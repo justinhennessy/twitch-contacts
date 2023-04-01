@@ -63,60 +63,40 @@ class Person {
 }
 
 function loadPeopleDataFromYaml(yamlStr) {
-    const data = yaml.load(yamlStr);
-    console.log('loading data ...')
+  const data = yaml.load(yamlStr);
+  console.log('loading data ...');
 
-    return data.people.map(personData => {
-        return new Person(
-            personData.username,
-            personData.realName,
-            personData.location,
-            personData.chatter_type,
-            personData.aspirations,
-            personData.song_requests,
-            personData.journal || [],
-            0
-        );
-    });
+  return data.people.map(personData => {
+      // Process song_requests
+      const songRequests = personData.song_requests.map(request => {
+          return {
+              date: request.Date,
+              entry: request.Entry
+          };
+      });
+
+      // Process journal
+      const journal = personData.journal.map(journalEntry => {
+          return {
+              date: journalEntry.Date,
+              entry: journalEntry.Entry
+          };
+      });
+
+      return new Person(
+          personData.username,
+          personData.realName,
+          personData.location,
+          personData.chatter_type,
+          personData.first_chatted,
+          personData.last_chatted,
+          personData.aspirations,
+          songRequests,
+          journal,
+          0
+      );
+  });
 }
-
-const yamlStr = `
-people:
-  - username: 'JustinHennessy'
-    realName: 'Justin'
-    chatter_type: 'known'
-    location: Brisbane
-  - username: 'Christian12wg'
-    realName: ''
-    location: ''
-    chatter_type: 'known'
-    aspirations: 'Working on a career in Counter Strike GO'
-    song_requests:
-      - 'Wallows - Remember When'
-    journal:
-      - 'Doing year 12'
-      - 'Doing math and physics'
-      - 'He asked me to do something with Wallows - Remember When'
-  - username: 'NightBot'
-    realName: ''
-    chatter_type: 'unknown'
-  - username: 'allistair10'
-    realName: 'Eden'
-    chatter_type: 'known'
-  - username: 'nbclimbrr'
-    realName: ''
-    location: 'New Zealand (find out the proper name she says)'
-    chatter_type: 'known'
-    aspirations: 'To get into the tech industry'
-  - username: 'SonglistBot'
-    realName: ''
-    location: 'cyber space'
-    chatter_type: 'bot'
-  - username: 'RecklessPelican'
-    realName: ''
-    location: ''
-    chatter_type: 'known'
-`;
 
 // let people = loadPeopleDataFromYaml(yamlStr);
 const message_count = {}; // Initialize the message_count object
@@ -152,6 +132,61 @@ const server = http.createServer((req, res) => {
         });
     }
 
+    const yaml = require('js-yaml');
+
+    const yamlStr = `
+people:
+  - username: 'JustinHennessy'
+    realName: 'Justin'
+    chatter_type: 'known'
+    first_chatted: 2023-03-01
+    last_chatted: 2023-03-27
+    location: Brisbane
+    apsirations: 'world peace'
+    song_requests:
+      - Date: 2023-03-01
+        Entry: 'Wallows - Remember When'
+    journal:
+      - Date: 2023-03-01
+        Entry: 'Doing year 12'
+      - Date: 2023-03-02
+        Entry: 'Doing math and physics'
+      - Date: 2023-03-03
+        Entry: 'He asked me to do something with Wallows - Remember When'
+  - username: 'Christian12wg'
+    realName: ''
+    location: ''
+    chatter_type: 'known'
+    first_chatted: 2023-03-01
+    last_chatted: 2023-03-27
+    aspirations: 'Working on a career in Counter Strike GO'
+    song_requests:
+      - 'Wallows - Remember When'
+    journal:
+      - 'Doing year 12'
+      - 'Doing math and physics'
+      - 'He asked me to do something with Wallows - Remember When'
+  - username: 'NightBot'
+    realName: ''
+    chatter_type: 'unknown'
+  - username: 'allistair10'
+    realName: 'Eden'
+    chatter_type: 'known'
+  - username: 'nbclimbrr'
+    realName: ''
+    location: 'New Zealand (find out the proper name she says)'
+    chatter_type: 'known'
+    aspirations: 'To get into the tech industry'
+  - username: 'SonglistBot'
+    realName: ''
+    location: 'cyber space'
+    chatter_type: 'bot'
+  - username: 'RecklessPelican'
+    realName: ''
+    location: ''
+    chatter_type: 'known'
+`;
+
     // Expose message_count as a JSON endpoint
     if (req.url === '/message_count') {
         res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -161,87 +196,13 @@ const server = http.createServer((req, res) => {
 
     if (req.url === '/people') {
 
-        const people = [
-            {
-              username: 'JustinHennessy',
-              realName: 'Justin',
-              location: 'Brisbane',
-              chatter_type: 'known',
-              aspirations: '',
-              song_requests: [],
-              message_count: 0,
-              journal: []
-            },
-            {
-              username: 'Christian12wg',
-              realName: '',
-              location: '',
-              chatter_type: 'known',
-              aspirations: 'Working on a career in Counter Strike GO',
-              song_requests: ['Wallows - Remember When'],
-              message_count: 0,
-              journal: [
-                'Doing year 12',
-                'Doing math and physics',
-                'He asked me to do something with Wallows - Remember When'
-              ]
-            },
-            {
-              username: 'Nightbot',
-              realName: '',
-              location: '',
-              chatter_type: 'unknown',
-              aspirations: '',
-              song_requests: [],
-              message_count: 0,
-              journal: []
-            },
-            {
-              username: 'allistair10',
-              realName: 'Eden',
-              location: '',
-              chatter_type: 'known',
-              aspirations: '',
-              song_requests: [],
-              message_count: 0,
-              journal: []
-            },
-            {
-              username: 'nbclimbrr',
-              realName: '',
-              location: 'New Zealand (find out the proper name she says)',
-              chatter_type: 'known',
-              aspirations: 'To get into the tech industry',
-              song_requests: [],
-              message_count: 0,
-              journal: []
-            },
-            {
-              username: 'SonglistBot',
-              realName: '',
-              location: 'cyber space',
-              chatter_type: 'bot',
-              aspirations: '',
-              song_requests: [],
-              message_count: 0,
-              journal: []
-            },
-            {
-              username: 'RecklessPelican',
-              realName: '',
-              location: '',
-              chatter_type: 'known',
-              aspirations: '',
-              song_requests: [],
-              message_count: 0,
-              journal: []
-            }
-          ];
+      const parsedYaml = yaml.load(yamlStr);
+      const people = parsedYaml.people;
 
-        console.log(people)
+      console.log(people)
 
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(people));
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(people));
     }
 });
 

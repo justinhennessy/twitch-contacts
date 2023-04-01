@@ -72,10 +72,11 @@
             border: 1px solid black;
             padding: 10px;
             display: none;
-            width: 300px;
+            width: 500px;
             text-align: left;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             opacity: 0.9;
+            font-size: 14px;
         }
 
         .rounded {
@@ -87,6 +88,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="contact-list"></div>
     <script>
@@ -157,7 +159,91 @@
                 default:
                     return 'grey';
             }
-        }        
+        }
+
+        function timeSince(dateString) {
+            if (!dateString) {
+                return 'Never chatted';
+            }
+
+            const pastDate = new Date(dateString);
+            const currentDate = new Date();
+            const differenceInTime = currentDate - pastDate;
+            const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+
+            if (differenceInDays < 30) {
+                return `${differenceInDays} days`;
+            } else if (differenceInDays < 30 * 4) {
+                const differenceInWeeks = Math.floor(differenceInDays / 7);
+                return `${differenceInWeeks} weeks`;
+            } else {
+                const differenceInMonths = Math.floor(differenceInDays / 30);
+                return `${differenceInMonths} months`;
+            }
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) {
+                return 'unknown';
+            }
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        function sortByDateDescending(a, b) {
+            const dateA = new Date(a.Date);
+            const dateB = new Date(b.Date);
+            return dateB - dateA;
+        }
+
+        function renderList(list) {
+            if (!list || !Array.isArray(list)) {
+                return '';
+            }
+
+            // Sort the list by date in descending order
+            const sortedList = list.slice().sort(sortByDateDescending);
+
+            return sortedList.map(item => {
+                const date = formatDate(item.Date);
+                const entry = item.Entry || 'unknown';
+                return `${date}: ${entry}`;
+            }).join('\n');
+        }
+
+        function createPersonElement(person) {
+            const personContainer = document.createElement('div');
+            const sphere = document.createElement('div');
+            const details = document.createElement('div');
+            const username = document.createElement('p');
+            const hoverModal = document.createElement('div'); // Add hover modal element
+
+            personContainer.className = 'person-container';
+            sphere.className = 'sphere';
+            details.className = 'details';
+            hoverModal.className = 'hover-modal rounded'; // Add class name to hover modal
+
+            username.innerText = `${person.username}\n`;
+
+            const realName = person.realName ? `RealName: ${person.realName}\n` : '';
+            const firstChat = person.first_chatted ? `First Chat: ${timeSince(person.first_chatted)}\n` : '';
+            const lastChat = person.last_chatted ? `Last Chat: ${timeSince(person.last_chatted)}\n` : '';
+            const aspirations = person.aspirations ? `Aspirations: ${person.aspirations}\n` : '';
+            const songRequests = person.song_requests?.length ? `\nSong Requests:\n${renderList(person.song_requests)}\n` : '';
+            const journal = person.journal?.length ? `\nJournal:\n${renderList(person.journal)}\n` : '';
+
+            hoverModal.innerText = `${realName}${firstChat}${lastChat}${aspirations}${songRequests}${journal}`;
+
+            details.appendChild(username);
+            personContainer.appendChild(sphere);
+            sphere.appendChild(hoverModal); // Add hover modal to sphere element
+            personContainer.appendChild(details); // Add details after sphere
+
+            return personContainer;
+        };
 
         function displayContacts(chatters) {
             contactList.innerHTML = '';
@@ -169,27 +255,15 @@
                 }
             }
 
+            console.log(people)
+
             people.filter(person => chatters.hasOwnProperty(person.username))
                 .forEach(person => {
-                    const personContainer = document.createElement('div');
-                    const sphere = document.createElement('div');
-                    const details = document.createElement('div');
-                    const username = document.createElement('p');
-                    const hoverModal = document.createElement('div'); // Add hover modal element
+                    const personElement = createPersonElement(person);
+                    contactList.appendChild(personElement);
 
-                    personContainer.className = 'person-container';
-                    sphere.className = 'sphere';
-                    details.className = 'details';
-                    hoverModal.className = 'hover-modal rounded'; // Add class name to hover modal
-
-                    username.innerText = `${person.username}\n`;
-                    hoverModal.innerText = `RealName: ${person.realName}\n\nNotes:\n${person.journal.join('\n')}`;
-
-                    details.appendChild(username);
-                    personContainer.appendChild(sphere);
-                    sphere.appendChild(hoverModal); // Add hover modal to sphere element
-                    personContainer.appendChild(details); // Add details after sphere
-                    contactList.appendChild(personContainer);
+                    const sphere = personElement.querySelector('.sphere');
+                    const details = personElement.querySelector('.details');
 
                     const animationWrapper = document.createElement('div');
                     animationWrapper.className = 'animation-wrapper';
@@ -198,9 +272,6 @@
                     const newSize = calculateSphereSize(person.message_count);
                     sphere.style.width = newSize + "px";
                     sphere.style.height = newSize + "px";
-
-                    // const colorInfo = getColorBasedOnMessageCount(person.message_count);
-                    // sphere.style.backgroundColor = colorInfo.color;
 
                     const colorInfo = getSphereColor(person.chatter_type);
                     sphere.style.backgroundColor = colorInfo;
@@ -215,15 +286,14 @@
 
                     details.style.display = 'flex';
                     details.style.flexDirection = 'column';
-                });
-        }
+                })
+        };
 
         fetchPeople();
 
         fetchMessageCounts();
 
         setInterval(fetchMessageCounts, 10000);
-        // setInterval(fetchPeople, 10000);
     </script>
 </body>
 
