@@ -54,6 +54,7 @@ function displayContacts(chatters) {
 
     if (personIndex === -1) {
         peopleArray.push(newPerson);
+        logChange(people);
     }
   }
 
@@ -91,7 +92,9 @@ function displayContacts(chatters) {
         }
       });
 
-      person.last_chatted = formattedDate();
+      if (person.chatter_type == 'known') {
+        person.last_chatted = formattedDate();
+      }
 
       const animationWrapper = document.createElement('div');
       animationWrapper.className = 'animation-wrapper';
