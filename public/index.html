@@ -5,147 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact List</title>
-    <style>
-        .person-container {
-            display: inline-block;
-            margin: 10px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .sphere {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            /* display: inline-block; */
-            font-size: 20px;
-            /* background-image: radial-gradient(circle at center, #f06, transparent); */
-            position: relative;
-            animation: spin 2s linear infinite;
-        }
-
-        .sphere {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: inline-block;
-            font-size: 20px;
-            position: relative;
-        }
-
-        .sphere::before {
-            content: "";
-            position: absolute;
-            top: 5%;
-            left: 5%;
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-            background: linear-gradient(to bottom, #87CEFA 0%, #1E90FF 50%);
-        }
-
-        .sphere::after {
-            content: "";
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            border-radius: 50%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
-        }
-
-        .details {
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 10px;
-        }
-
-        /* Add CSS for hover modal */
-        .hover-modal {
-            position: absolute;
-            top: 110%;
-            left: 0;
-            z-index: 1;
-            background-color: white;
-            border-radius: 10px;
-            border: 1px solid black;
-            padding: 10px;
-            display: none;
-            width: 500px;
-            text-align: left;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            opacity: 0.9;
-            font-size: 14px;
-        }
-
-        .rounded {
-            border-radius: 10px;
-        }
-
-        .sphere:hover .hover-modal {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="/js/date_time.js"></script>
 </head>
-
 <body>
     <div id="contact-list"></div>
+    <script src="/js/people.js"></script>
+    <script src="/js/message_count.js"></script>
+    <script src="/js/main.js"></script>
     <script>
-
-        let people = []
-
-        function fetchPeople() {
-            fetch('/people')
-                .then(res => res.json())
-                .then(data => {
-                    people = data;
-                    console.log(people)
-                    fetchMessageCounts()
-                });
-        }
-
-        const contactList = document.getElementById('contact-list');
-        let chatters = {}
-
-        function fetchMessageCounts() {
-            fetch('/message_count')
-                .then(res => res.json())
-                .then(data => {
-                    chatters = data;
-                    console.log(chatters)
-                    displayContacts(chatters);
-                });
-        }
-
-        function getColorBasedOnMessageCount(message_count) {
-            if (message_count < 10) {
-                return { color: 'lightblue', spin: false };
-            } else if (message_count >= 10 && message_count < 25) {
-                return { color: 'lightgreen', spin: true };
-            } else if (message_count >= 25 && message_count < 50) {
-                return { color: 'orange', spin: true };
-            } else if (message_count >= 50 && message_count < 100) {
-                return { color: 'lightcoral', spin: true };
-            } else {
-                return { color: 'red', spin: true };
-            }
-        }
-
-        function calculateSphereSize(message_count) {
-            const baseSize = 50;
-            const maxSize = 200;
-            const sizeFactor = 0.2;
-
-            let newSize = baseSize + (message_count / sizeFactor);
-
-            if (newSize > maxSize) {
-                newSize = maxSize;
-            }
-
-            return newSize;
-        }
-
         function getSphereColor(chatter_type) {
             switch (chatter_type) {
                 case 'known':
@@ -159,44 +27,6 @@
                 default:
                     return 'grey';
             }
-        }
-
-        function timeSince(dateString) {
-            if (!dateString) {
-                return 'Never chatted';
-            }
-
-            const pastDate = new Date(dateString);
-            const currentDate = new Date();
-            const differenceInTime = currentDate - pastDate;
-            const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
-
-            if (differenceInDays < 30) {
-                return `${differenceInDays} days`;
-            } else if (differenceInDays < 30 * 4) {
-                const differenceInWeeks = Math.floor(differenceInDays / 7);
-                return `${differenceInWeeks} weeks`;
-            } else {
-                const differenceInMonths = Math.floor(differenceInDays / 30);
-                return `${differenceInMonths} months`;
-            }
-        }
-
-        function formatDate(dateString) {
-            if (!dateString) {
-                return 'unknown';
-            }
-            const date = new Date(dateString);
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
-        }
-
-        function sortByDateDescending(a, b) {
-            const dateA = new Date(a.Date);
-            const dateB = new Date(b.Date);
-            return dateB - dateA;
         }
 
         function renderList(list) {
@@ -244,56 +74,6 @@
 
             return personContainer;
         };
-
-        function displayContacts(chatters) {
-            contactList.innerHTML = '';
-
-            for (const person of people) {
-                const username = person.username;
-                if (chatters.hasOwnProperty(username)) {
-                    person.message_count = chatters[username];
-                }
-            }
-
-            console.log(people)
-
-            people.filter(person => chatters.hasOwnProperty(person.username))
-                .forEach(person => {
-                    const personElement = createPersonElement(person);
-                    contactList.appendChild(personElement);
-
-                    const sphere = personElement.querySelector('.sphere');
-                    const details = personElement.querySelector('.details');
-
-                    const animationWrapper = document.createElement('div');
-                    animationWrapper.className = 'animation-wrapper';
-                    sphere.appendChild(animationWrapper);
-
-                    const newSize = calculateSphereSize(person.message_count);
-                    sphere.style.width = newSize + "px";
-                    sphere.style.height = newSize + "px";
-
-                    const colorInfo = getSphereColor(person.chatter_type);
-                    sphere.style.backgroundColor = colorInfo;
-
-                    const messageCount = document.createElement('span');
-                    messageCount.textContent = person.message_count;
-                    messageCount.style.position = 'absolute';
-                    messageCount.style.top = '50%';
-                    messageCount.style.left = '50%';
-                    messageCount.style.transform = 'translate(-50%, -50%)';
-                    sphere.appendChild(messageCount);
-
-                    details.style.display = 'flex';
-                    details.style.flexDirection = 'column';
-                })
-        };
-
-        fetchPeople();
-
-        fetchMessageCounts();
-
-        setInterval(fetchMessageCounts, 10000);
     </script>
 </body>
 
