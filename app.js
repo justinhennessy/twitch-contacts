@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const tmi = require('tmi.js');
 const dotenv = require('dotenv');
+const util = require('util');
 
 const express = require('express');
 const app = express();
@@ -201,7 +202,7 @@ app.post('/log', (req, res) => {
     });
     req.on('end', () => {
       const data = JSON.parse(body);
-      console.log('Data logged from client:', data);
+      console.log('Data logged from client:', util.inspect(data, { depth: null }));
       res.end();
     });
   console.log(message_count);
