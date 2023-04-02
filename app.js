@@ -3,13 +3,9 @@ const fs = require('fs');
 const path = require('path');
 const tmi = require('tmi.js');
 const dotenv = require('dotenv');
-const yaml = require('js-yaml');
 
 const express = require('express');
 const app = express();
-
-// Serve static files from the "public" directory
-app.use(express.static('public'));
 
 dotenv.config();
 
@@ -48,13 +44,68 @@ requestOAuthToken()
         console.error('Error while requesting OAuth token:', error);
     });
 
+    const yamlStr = `
+    people:
+    - username: 'JustinHennessy'
+      realName: 'Justin'
+      chatter_type: 'known'
+      first_chatted: 2023-03-01
+      last_chatted: 2023-03-27
+      interaction_count: 0
+      location: Brisbane
+      aspirations: 'world peace'
+      song_requests:
+        - Date: 2023-03-01
+          Entry: 'Wallows - Remember When'
+      journal:
+        - Date: 2023-03-01
+          Entry: 'Doing year 12'
+        - Date: 2023-03-02
+          Entry: 'Doing math and physics'
+        - Date: 2023-03-03
+          Entry: 'He asked me to do something with Wallows - Remember When'
+    - username: 'Christian12wg'
+      realName: ''
+      location: ''
+      chatter_type: 'known'
+      first_chatted: 2023-03-01
+      last_chatted: 2023-03-27
+      aspirations: 'Working on a career in Counter Strike GO'
+      song_requests:
+        - 'Wallows - Remember When'
+      journal:
+        - 'Doing year 12'
+        - 'Doing math and physics'
+        - 'He asked me to do something with Wallows - Remember When'
+    - username: 'Nightbot'
+      realName: ''
+      chatter_type: 'unknown'
+      interaction_count: 0
+    - username: 'allistair10'
+      realName: 'Eden'
+      chatter_type: 'known'
+    - username: 'nbclimbrr'
+      realName: ''
+      location: 'New Zealand (find out the proper name she says)'
+      chatter_type: 'known'
+      aspirations: 'To get into the tech industry'
+    - username: 'RecklessPelican'
+      realName: ''
+      location: ''
+      first_chatted: 2023-03-01
+      last_chatted: 2023-03-01
+      chatter_type: 'known'
+    `;
+  
+const yaml = require('js-yaml');
 
 class Person {
-    constructor(username, realName, location = '', chatter_type = 'unknown', aspirations = '', song_requests = [], journal = [], message_count = 0) {
+    constructor(username, realName, location = '', chatter_type = 'unknown', interaction_count = 0, aspirations = '', song_requests = [], journal = [], message_count = 0) {
         this.username = username;
         this.realName = realName;
         this.location = location;
         this.chatter_type = chatter_type;
+        this.interaction_count = interaction_count;
         this.aspirations = aspirations;
         this.song_requests = song_requests;
         this.message_count = message_count;
@@ -66,22 +117,29 @@ function loadPeopleDataFromYaml(yamlStr) {
   const data = yaml.load(yamlStr);
   console.log('loading data ...');
 
-  return data.people.map(personData => {
-      // Process song_requests
-      const songRequests = personData.song_requests.map(request => {
-          return {
-              date: request.Date,
-              entry: request.Entry
-          };
-      });
+  console.log(data)
 
-      // Process journal
-      const journal = personData.journal.map(journalEntry => {
-          return {
-              date: journalEntry.Date,
-              entry: journalEntry.Entry
-          };
-      });
+  return data.people.map(personData => {
+
+      let songRequests = [];
+      if (personData.song_requests) {
+        const songRequests = personData.song_requests.map(request => {
+            return {
+                date: request.Date,
+                 entry: request.Entry
+            };
+        });
+      }
+
+      let journal = [];
+      if (personData.journal) {
+        const journal = personData.journal.map(journalEntry => {
+            return {
+                date: journalEntry.Date,
+                entry: journalEntry.Entry
+            };
+        });
+      }
 
       return new Person(
           personData.username,
@@ -90,6 +148,7 @@ function loadPeopleDataFromYaml(yamlStr) {
           personData.chatter_type,
           personData.first_chatted,
           personData.last_chatted,
+          personData.interaction_count || 0,
           personData.aspirations,
           songRequests,
           journal,
@@ -98,7 +157,6 @@ function loadPeopleDataFromYaml(yamlStr) {
   });
 }
 
-// let people = loadPeopleDataFromYaml(yamlStr);
 const message_count = {}; // Initialize the message_count object
 const unique_chatters = {};
 
@@ -109,6 +167,8 @@ function onMessageHandler(target, context, msg, self) {
 
     chatter = context['display-name']
 
+    console.log(chatter)
+
     // Update the message_count for the current target
     if (message_count[chatter]) {
         message_count[chatter]++;
@@ -117,95 +177,58 @@ function onMessageHandler(target, context, msg, self) {
     }
 }
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  console.log('Request URL:', req.url); // Log the requested URL
+  next();
+}); 
+
+app.get('/', (req, res) => {
+  const indexPath = path.join(__dirname, 'public', 'index.html');
+  res.sendFile(indexPath, (err) => {
+      if (err) {
+          res.status(500).send(`Error loading ${indexPath}`);
+      }
+  });
+});
+
+app.post('/log', (req, res) => {
+  let body = '';
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    req.on('end', () => {
+      const data = JSON.parse(body);
+      console.log('Data logged from client:', data);
+      res.end();
+    });
+  console.log(message_count);
+});
+
+// Expose message_count as a JSON endpoint
+app.get('/message_count', (req, res) => {
+    res.json(message_count);
+    console.log(message_count);
+});
+
+// Expose people as a JSON endpoint
+app.get('/people', (req, res) => {
+    const parsedYaml = yaml.load(yamlStr);
+    const people = parsedYaml.people;
+    console.log(people);
+    res.json(people);
+});
+
+// Create an HTTP server that uses the Express app
 const server = http.createServer((req, res) => {
-    // Serve index.html for the root path
-    if (req.url === '/') {
-        const indexPath = path.join(__dirname, 'public', 'index.html');
-        fs.readFile(indexPath, (err, data) => {
-            if (err) {
-                res.writeHead(500);
-                res.end(`Error loading ${indexPath}`);
-                return;
-            }
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(data);
-        });
-    }
 
-    const yaml = require('js-yaml');
 
-    const yamlStr = `
-people:
-  - username: 'JustinHennessy'
-    realName: 'Justin'
-    chatter_type: 'known'
-    first_chatted: 2023-03-01
-    last_chatted: 2023-03-27
-    location: Brisbane
-    apsirations: 'world peace'
-    song_requests:
-      - Date: 2023-03-01
-        Entry: 'Wallows - Remember When'
-    journal:
-      - Date: 2023-03-01
-        Entry: 'Doing year 12'
-      - Date: 2023-03-02
-        Entry: 'Doing math and physics'
-      - Date: 2023-03-03
-        Entry: 'He asked me to do something with Wallows - Remember When'
-  - username: 'Christian12wg'
-    realName: ''
-    location: ''
-    chatter_type: 'known'
-    first_chatted: 2023-03-01
-    last_chatted: 2023-03-27
-    aspirations: 'Working on a career in Counter Strike GO'
-    song_requests:
-      - 'Wallows - Remember When'
-    journal:
-      - 'Doing year 12'
-      - 'Doing math and physics'
-      - 'He asked me to do something with Wallows - Remember When'
-  - username: 'NightBot'
-    realName: ''
-    chatter_type: 'unknown'
-  - username: 'allistair10'
-    realName: 'Eden'
-    chatter_type: 'known'
-  - username: 'nbclimbrr'
-    realName: ''
-    location: 'New Zealand (find out the proper name she says)'
-    chatter_type: 'known'
-    aspirations: 'To get into the tech industry'
-  - username: 'SonglistBot'
-    realName: ''
-    location: 'cyber space'
-    chatter_type: 'bot'
-  - username: 'RecklessPelican'
-    realName: ''
-    location: ''
-    chatter_type: 'known'
-`;
-
-    // Expose message_count as a JSON endpoint
-    if (req.url === '/message_count') {
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(message_count));
-        console.log(message_count)
-    }
-
-    if (req.url === '/people') {
-
-      const parsedYaml = yaml.load(yamlStr);
-      const people = parsedYaml.people;
-
-      console.log(people)
-
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(people));
-    }
+    // Let Express app handle the request and response
+    app(req, res);
 });
 
 server.listen(3000, () => {
-    console.log('Server running at http://localhost:3000/');
+  console.log('Server listening on port 3000');
 });
