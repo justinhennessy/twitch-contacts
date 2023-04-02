@@ -81,6 +81,7 @@ function displayContacts(chatters) {
               person.chatter_type = 'known';
               person.first_chatted = formattedDate();
               logChange(people);
+              displayContacts(chatters);
               break;
             case 'known':
               person.interaction_count = !isNaN(person.interaction_count) ? ++person.interaction_count : 1;

@@ -80,7 +80,7 @@ requestOAuthToken()
         - 'He asked me to do something with Wallows - Remember When'
     - username: 'Nightbot'
       realName: ''
-      chatter_type: 'unknown'
+      chatter_type: 'bot'
       interaction_count: 0
     - username: 'allistair10'
       realName: 'Eden'
