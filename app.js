@@ -67,32 +67,34 @@ requestOAuthToken()
           Entry: 'He asked me to do something with Wallows - Remember When'
     - username: 'Christian12wg'
       realName: ''
-      location: ''
       chatter_type: 'known'
       first_chatted: 2023-03-01
       last_chatted: 2023-03-27
+      interaction_count: 0
+      location: Brisbane
       aspirations: 'Working on a career in Counter Strike GO'
       song_requests:
-        - 'Wallows - Remember When'
+        - Date: 2023-03-01
+          Entry: 'Wallows - Remember When'
       journal:
-        - 'Doing year 12'
-        - 'Doing math and physics'
-        - 'He asked me to do something with Wallows - Remember When'
+        - Date: 2023-03-01
+          Entry: 'Doing year 12'
+        - Date: 2023-03-02
+          Entry: 'Doing math and physics'
+        - Date: 2023-03-03
+          Entry: 'He asked me to do something with Wallows - Remember When'
     - username: 'Nightbot'
-      realName: ''
       chatter_type: 'bot'
-      interaction_count: 0
+    - username: 'SonglistBot'
+      chatter_type: 'bot'
     - username: 'allistair10'
       realName: 'Eden'
       chatter_type: 'known'
     - username: 'nbclimbrr'
-      realName: ''
       location: 'New Zealand (find out the proper name she says)'
       chatter_type: 'known'
       aspirations: 'To get into the tech industry'
     - username: 'RecklessPelican'
-      realName: ''
-      location: ''
       first_chatted: 2023-03-01
       last_chatted: 2023-03-01
       chatter_type: 'known'
@@ -118,7 +120,7 @@ function loadPeopleDataFromYaml(yamlStr) {
   const data = yaml.load(yamlStr);
   console.log('loading data ...');
 
-  console.log(data)
+  console.log(util.inspect(data, { depth: null }))
 
   return data.people.map(personData => {
 
@@ -168,8 +170,6 @@ function onMessageHandler(target, context, msg, self) {
 
     chatter = context['display-name']
 
-    console.log(chatter)
-
     // Update the message_count for the current target
     if (message_count[chatter]) {
         message_count[chatter]++;
@@ -182,7 +182,7 @@ function onMessageHandler(target, context, msg, self) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  console.log('Request URL:', req.url); // Log the requested URL
+  // console.log('Request URL:', req.url); // Log the requested URL
   next();
 }); 
 
@@ -211,7 +211,7 @@ app.post('/log', (req, res) => {
 // Expose message_count as a JSON endpoint
 app.get('/message_count', (req, res) => {
     res.json(message_count);
-    console.log(message_count);
+    // console.log(message_count);
 });
 
 // Expose people as a JSON endpoint

@@ -17,15 +17,15 @@
         function getSphereColor(chatter_type) {
             switch (chatter_type) {
                 case 'known':
-                    return 'lightgreen';
+                    return '#90EE90';
                 case 'unknown':
-                    return 'grey';
+                    return '#D3D3D3';
                 case 'bot':
-                    return 'orange';
+                    return '#FFA500';
                 case 'vip':
-                    return 'lightgreen';
+                    return '#FFD700';
                 default:
-                    return 'grey';
+                    return '#D3D3D3';
             }
         }
 
@@ -58,14 +58,15 @@
 
             username.innerText = `${person.username}\n`;
 
-            const realName = person.realName ? `RealName: ${person.realName}\n` : '';
+            const realName = person.realName ? `Name: ${person.realName}\n` : '';
+            const chatterType = `Type: ${person.chatter_type}\n`;
             const firstChat = person.first_chatted ? `First Chat: ${timeSince(person.first_chatted)}\n` : '';
             const lastChat = person.last_chatted ? `Last Chat: ${timeSince(person.last_chatted)}\n` : '';
             const aspirations = person.aspirations ? `Aspirations: ${person.aspirations}\n` : '';
             const songRequests = person.song_requests?.length ? `\nSong Requests:\n${renderList(person.song_requests)}\n` : '';
             const journal = person.journal?.length ? `\nJournal:\n${renderList(person.journal)}\n` : '';
 
-            hoverModal.innerText = `${realName}${firstChat}${lastChat}${aspirations}${songRequests}${journal}`;
+            hoverModal.innerText = `${chatterType}${realName}${firstChat}${lastChat}${aspirations}${songRequests}${journal}`;
 
             details.appendChild(username);
             personContainer.appendChild(sphere);

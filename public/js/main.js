@@ -35,6 +35,34 @@ function displayContacts(chatters) {
     return formattedDate;
   }
 
+  function calculateDarkerColor(startColor, darknessFactor) {
+    // Convert hexadecimal color to RGB
+    function hexToRgb(hex) {
+      const bigint = parseInt(hex.slice(1), 16);
+      const r = (bigint >> 16) & 255;
+      const g = (bigint >> 8) & 255;
+      const b = bigint & 255;
+      return [r, g, b];
+    }
+  
+    // Convert RGB color to hexadecimal
+    function rgbToHex(r, g, b) {
+      const rgb = (r << 16) | (g << 8) | b;
+      return "#" + (0x1000000 + rgb).toString(16).slice(1);
+    }
+  
+    // Calculate darker color
+    function darkenColor(rgb, factor) {
+      return rgb.map(value => Math.max(0, Math.floor(value * factor)));
+    }
+  
+    const startRgb = hexToRgb(startColor);
+    const endRgb = darkenColor(startRgb, darknessFactor);
+    const endColor = rgbToHex(...endRgb);
+  
+    return { startColor, endColor };
+  }  
+
   class Person {
     constructor(username, realName, location = '', chatter_type = 'unknown', interaction_count = 0, aspirations = '', song_requests = [], journal = [], message_count = 0) {
       this.username = username;
@@ -48,7 +76,7 @@ function displayContacts(chatters) {
       this.journal = journal;
     }
   }
-
+  
   function addPersonIfNotExists(newPerson, peopleArray) {
     const personIndex = peopleArray.findIndex(person => person.username === newPerson.username);
 
@@ -105,8 +133,8 @@ function displayContacts(chatters) {
       sphere.style.width = newSize + "px";
       sphere.style.height = newSize + "px";
 
-      const colorInfo = getSphereColor(person.chatter_type);
-      sphere.style.backgroundColor = colorInfo;
+      const colorInfo = calculateDarkerColor(getSphereColor(person.chatter_type), 2 );
+      sphere.style.background = `linear-gradient(to bottom right, ${colorInfo.startColor}, ${colorInfo.endColor})`;
 
       const messageCount = document.createElement('span');
       messageCount.textContent = person.message_count;
