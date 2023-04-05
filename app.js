@@ -68,8 +68,8 @@ requestOAuthToken()
     - username: 'Christian12wg'
       realName: ''
       chatter_type: 'known'
-      first_chatted: 2023-03-01
-      last_chatted: 2023-03-27
+      first_chatted: 2023-03-0
+      last_chatted: 2023-04-05
       interaction_count: 0
       location: Brisbane
       aspirations: 'Working on a career in Counter Strike GO'
@@ -86,7 +86,9 @@ requestOAuthToken()
     - username: 'Nightbot'
       chatter_type: 'bot'
     - username: 'SonglistBot'
-      chatter_type: 'unknown'
+      chatter_type: 'bot'
+    - username: 'StreamElements'
+      chatter_type: 'bot'
     - username: 'allistair10'
       realName: 'Eden'
       chatter_type: 'known'
