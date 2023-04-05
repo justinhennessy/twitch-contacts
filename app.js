@@ -86,7 +86,7 @@ requestOAuthToken()
     - username: 'Nightbot'
       chatter_type: 'bot'
     - username: 'SonglistBot'
-      chatter_type: 'bot'
+      chatter_type: 'unknown'
     - username: 'allistair10'
       realName: 'Eden'
       chatter_type: 'known'

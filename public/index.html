@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="/js/date_time.js"></script>
 </head>
+
 <body>
     <div id="contact-list"></div>
     <script src="/js/people.js"></script>
@@ -46,15 +47,17 @@
 
         function createPersonElement(person) {
             const personContainer = document.createElement('div');
+            const sphereContainer = document.createElement('div'); // Create sphere-container
             const sphere = document.createElement('div');
             const details = document.createElement('div');
             const username = document.createElement('p');
-            const hoverModal = document.createElement('div'); // Add hover modal element
+            const hoverModal = document.createElement('div');
 
             personContainer.className = 'person-container';
+            sphereContainer.className = 'sphere-container'; // Add class to sphere-container
             sphere.className = 'sphere';
             details.className = 'details';
-            hoverModal.className = 'hover-modal rounded'; // Add class name to hover modal
+            hoverModal.className = 'hover-modal rounded';
 
             username.innerText = `${person.username}\n`;
 
@@ -69,12 +72,21 @@
             hoverModal.innerText = `${chatterType}${realName}${firstChat}${lastChat}${aspirations}${songRequests}${journal}`;
 
             details.appendChild(username);
-            personContainer.appendChild(sphere);
-            sphere.appendChild(hoverModal); // Add hover modal to sphere element
-            personContainer.appendChild(details); // Add details after sphere
+            personContainer.appendChild(sphereContainer);
+            sphereContainer.appendChild(sphere);
+            sphere.appendChild(hoverModal);
+            personContainer.appendChild(details);
+
+            const sphereElement = document.querySelector('.sphere');
+            const hoverModalElement = document.querySelector('.hover-modal');
+
+            if (sphereElement && hoverModalElement) {
+                console.log(sphereContainer.parentNode);
+            }
 
             return personContainer;
         };
+
     </script>
 </body>
 

@@ -3,60 +3,49 @@
     margin: 10px;
     text-align: center;
     vertical-align: middle;
+    align-items: center;
+    display: flex;
+    z-index: 1;
 }
-
-/* .sphere {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    font-size: 20px;
-    position: relative;
-    animation: spin 2s linear infinite;
-} */
 
 .sphere {
     width: 100px;
     height: 100px;
+    z-index: 1;
     border-radius: 50%;
     display: inline-block;
     font-size: 20px;
     position: relative;
+    border: 1px solid grey;
+    perspective: 1000px;
+    cursor: pointer;
 }
 
-/* .sphere::before {
-    content: "";
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
-    background: linear-gradient(to bottom, #87CEFA 0%, #1E90FF 50%);
-} */
+.spin-animation {
+    animation: spin 3s linear 1;
+}
 
-/* .sphere::after {
-    content: "";
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    border-radius: 50%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
-} */
+@keyframes spin {
+    0% {
+      transform: rotateY(0deg);
+    }
+    100% {
+      transform: rotateY(1080deg); /* 3 full rotations (360 * 3) */
+    }
+  }
 
 .details {
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
+    z-index: 1;
 }
 
-/* Add CSS for hover modal */
 .hover-modal {
     position: absolute;
     top: 110%;
     left: 0;
-    z-index: 1;
+    z-index: 9999;
     background-color: white;
     border-radius: 10px;
     border: 1px solid black;
@@ -67,6 +56,8 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     opacity: 0.9;
     font-size: 14px;
+    margin-left: 1rem;
+    will-change: transform;
 }
 
 .rounded {
@@ -75,4 +66,14 @@
 
 .sphere:hover .hover-modal {
     display: block;
+}
+
+.sphere-container {
+    perspective: 1000px;
+    position: relative;
+    z-index: 1;
+}
+  
+.sphere-container.spin-animation {
+    animation: spin 3s linear 1;
 }
