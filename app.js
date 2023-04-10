@@ -68,7 +68,7 @@ requestOAuthToken()
     - username: 'Christian12wg'
       realName: ''
       chatter_type: 'known'
-      first_chatted: 2023-03-0
+      first_chatted: 2023-03-01
       last_chatted: 2023-04-05
       interaction_count: 0
       location: Brisbane
@@ -89,6 +89,8 @@ requestOAuthToken()
       chatter_type: 'bot'
     - username: 'kiwismoot'
       chatter_type: 'known'
+      first_chatted: 2023-04-10
+      last_chatted: 2023-04-10
       location: 'Brisbane'
     - username: 'sery_bot'
       chatter_type: 'bot'
@@ -101,6 +103,7 @@ requestOAuthToken()
       location: 'New Zealand (find out the proper name she says)'
       chatter_type: 'known'
       aspirations: 'To get into the tech industry'
+      first_chatted: 2023-03-01
     - username: 'RecklessPelican'
       first_chatted: 2023-03-01
       last_chatted: 2023-03-01
