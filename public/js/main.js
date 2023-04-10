@@ -100,6 +100,7 @@ function displayContacts(chatters) {
       const details = personElement.querySelector('.details');
 
       sphere.addEventListener('click', function () {
+        
         const clicked_chatter = details.textContent;
         const person = people.find(obj => obj.username === clicked_chatter);
 
@@ -109,7 +110,16 @@ function displayContacts(chatters) {
               person.chatter_type = 'known';
               person.first_chatted = formattedDate();
               logChange(people);
-              displayContacts(chatters);
+
+              sphere.classList.add('spin-animation');
+
+              sphere.addEventListener('animationend', function() {
+                
+                sphere.classList.remove('spin-animation');
+                
+                displayContacts(chatters);
+              }, { once: true });
+
               break;
             case 'known':
               person.interaction_count = !isNaN(person.interaction_count) ? ++person.interaction_count : 1;
