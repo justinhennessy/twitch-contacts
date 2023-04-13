@@ -65,6 +65,15 @@ requestOAuthToken()
           Entry: 'Doing math and physics'
         - Date: 2023-03-03
           Entry: 'He asked me to do something with Wallows - Remember When'
+    - username: 'johnsannios'
+      location: 'California'
+      first_chatted: 2023-04-14
+      chatter_type: 'known'
+    - username: '3ply_Unlimited'
+      realName: 'Matt'
+      location: 'Brisbane'
+      chatter_type: 'known'
+      first_chatted: 2022-06-01
     - username: 'Christian12wg'
       realName: ''
       chatter_type: 'known'
@@ -89,7 +98,7 @@ requestOAuthToken()
       chatter_type: 'bot'
     - username: 'kiwismoot'
       chatter_type: 'known'
-      first_chatted: 2023-04-10
+      first_chatted: 2023-03-10
       last_chatted: 2023-04-10
       location: 'Brisbane'
     - username: 'sery_bot'
