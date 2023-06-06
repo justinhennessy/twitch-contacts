@@ -5,19 +5,16 @@
     vertical-align: middle;
     align-items: center;
     display: flex;
-    z-index: 1;
+    position: relative;
 }
 
 .sphere {
     width: 100px;
     height: 100px;
-    z-index: 1;
     border-radius: 50%;
     display: inline-block;
     font-size: 20px;
-    position: relative;
     border: 1px solid grey;
-    perspective: 1000px;
     cursor: pointer;
 }
 
@@ -38,7 +35,6 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
-    z-index: 1;
 }
 
 .hover-modal {
@@ -66,12 +62,6 @@
 
 .sphere:hover .hover-modal {
     display: block;
-}
-
-.sphere-container {
-    perspective: 1000px;
-    position: relative;
-    z-index: 1;
 }
   
 .sphere-container.spin-animation {
