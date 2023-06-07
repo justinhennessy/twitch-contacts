@@ -74,20 +74,21 @@ requestOAuthToken()
       location: 'Brisbane'
       chatter_type: 'known'
       first_chatted: 2022-06-01
+      last_chatted: 2023-04-27
     - username: 'Christian12wg'
       realName: ''
       chatter_type: 'known'
       first_chatted: 2023-03-01
-      last_chatted: 2023-04-05
+      last_chatted: 2023-04-27
       interaction_count: 0
-      location: Brisbane
+      location: 'Denmark'
       aspirations: 'Working on a career in Counter Strike GO'
       song_requests:
         - Date: 2023-03-01
           Entry: 'Wallows - Remember When'
       journal:
         - Date: 2023-03-01
-          Entry: 'Doing year 12'
+          Entry: 'Doing year 12, finishes end of 2023'
         - Date: 2023-03-02
           Entry: 'Doing math and physics'
         - Date: 2023-03-03
