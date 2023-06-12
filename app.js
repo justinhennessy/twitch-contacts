@@ -47,13 +47,24 @@ requestOAuthToken()
 
     const yamlStr = `
     people:
+    - username: 'mirrors123456'
+      chatter_type: 'known'
+      first_chatted: 2023-06-13
+      last_chatted: 2023-06-13
+      location: 'Hong Kong'
+      journal:
+        - Date: 2023-06-13
+          Entry: 'First person to use my song list command'
+      song_requests:
+        - Date: 2023-06-13
+          Entry: 'Hotel California'
     - username: 'JustinHennessy'
       realName: 'Justin'
       chatter_type: 'known'
       first_chatted: 2023-03-01
       last_chatted: 2023-03-27
       interaction_count: 0
-      location: Brisbane
+      location: 'Brisbane'
       aspirations: 'world peace'
       song_requests:
         - Date: 2023-03-01
@@ -119,7 +130,7 @@ requestOAuthToken()
       last_chatted: 2023-03-01
       chatter_type: 'known'
     `;
-  
+
 const yaml = require('js-yaml');
 
 class Person {
@@ -204,7 +215,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   // console.log('Request URL:', req.url); // Log the requested URL
   next();
-}); 
+});
 
 app.get('/', (req, res) => {
   const indexPath = path.join(__dirname, 'public', 'index.html');
