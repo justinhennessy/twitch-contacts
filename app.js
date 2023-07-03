@@ -58,6 +58,23 @@ requestOAuthToken()
       song_requests:
         - Date: 2023-06-13
           Entry: 'Hotel California'
+    - username: 'samlepolisson'
+      last_chatted: 2023-07-04
+      first_chatted: 2023-06-30
+      location: 'France'
+      journal:
+        - Date: 2023-06-30
+          Entry: 'lives in south of france'
+      chatter_type: 'known'
+      song_requests:
+        - Date: 2023-07-04
+          Entry: 'Shape of my heart'
+    - username: 'qvvy'
+      realName: 'James (Hunter) Bjorkman'
+      location: 'Canada'
+      chatter_type: 'known'
+      first_chatted: 2023-06-30
+      last_chatted: 2023-06-30
     - username: 'JustinHennessy'
       realName: 'Justin'
       chatter_type: 'known'
