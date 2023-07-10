@@ -47,6 +47,14 @@ requestOAuthToken()
 
     const yamlStr = `
     people:
+    - username: 'calvinwillplay'
+      chatter_type: 'known'
+      first_chatted: 2023-07-11
+      last_chatted: 2023-07-11
+      location: 'Brisbane'
+      journal:
+        - Date: 2023-07-11
+          Entry: 'I was on the voice Australia 2016 and got to the top 24, have performed since I was 16 and took a little break but just getting back into it'
     - username: 'mirrors123456'
       chatter_type: 'known'
       first_chatted: 2023-06-13
@@ -82,7 +90,6 @@ requestOAuthToken()
       last_chatted: 2023-03-27
       interaction_count: 0
       location: 'Brisbane'
-      aspirations: 'world peace'
       song_requests:
         - Date: 2023-03-01
           Entry: 'Wallows - Remember When'
