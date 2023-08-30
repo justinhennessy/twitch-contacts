@@ -47,6 +47,51 @@ requestOAuthToken()
 
     const yamlStr = `
     people:
+    - username: 'Razio_IoT'
+      last_chatted: 2023-07-25
+      first_chatted: 2023-07-25
+      location: 'Belgium'
+      chatter_type: 'known'
+      journal:
+        - Date: 2023-07-25
+          Entry: 'they said: you sound american...'
+        - Date: 2023-07-25
+          Entry: 'Im doing software for a company that makes concrete products...'
+        - Date: 2023-07-25
+          Entry: 'I have small knowledge of several things... c#, java, python'
+        - Date: 2023-07-25
+          Entry: 'started to play (guitar) 2 years ago but stopped... lack of time...'
+    - username: 'samlepolisson'
+      last_chatted: 2023-08-31
+      first_chatted: 2023-06-30
+      location: 'France'
+      journal:
+        - Date: 2023-06-30
+          Entry: 'lives in south of france'
+        - Date: 2023-06-30
+          Entry: 'he said he was about to sit an exam at school'
+      chatter_type: 'known'
+      song_requests:
+        - Date: 2023-07-04
+          Entry: 'Shape of my heart'
+    - username: 'StarKidPep'
+      chatter_type: 'known'
+      location: 'UK'
+      journal:
+        - Date: 2023-07-13
+          Entry: 'Has 4 guitars, 2 electrics and 2 acoustic, 2 epiphones slack edition, a PRS and a Taylor, was looking for a 5th, 12 string'
+        - Date: 2023-07-13
+          Entry: 'knows nzclimbrr'
+        - Date: 2023-07-13
+          Entry: 'he has dabbled with a looper but without success, Im much better just doing straight thythm guitar strumming'
+        - Date: 2023-07-13
+          Entry: 'a night person so Ill be up til at least 2 or 3 am'
+        - Date: 2023-07-13
+          Entry: 'not currently working but that is very much my area of knowledge'
+        - Date: 2023-07-25
+          Entry: '12 string guitar: I got a Martin... cant remember the specific model'
+      first_chatted: 2023-07-13
+      last_chatted: 2023-07-25
     - username: 'calvinwillplay'
       chatter_type: 'known'
       first_chatted: 2023-07-11
@@ -66,17 +111,6 @@ requestOAuthToken()
       song_requests:
         - Date: 2023-06-13
           Entry: 'Hotel California'
-    - username: 'samlepolisson'
-      last_chatted: 2023-07-04
-      first_chatted: 2023-06-30
-      location: 'France'
-      journal:
-        - Date: 2023-06-30
-          Entry: 'lives in south of france'
-      chatter_type: 'known'
-      song_requests:
-        - Date: 2023-07-04
-          Entry: 'Shape of my heart'
     - username: 'qvvy'
       realName: 'James (Hunter) Bjorkman'
       location: 'Canada'
@@ -145,6 +179,7 @@ requestOAuthToken()
       realName: 'Eden'
       chatter_type: 'known'
     - username: 'nbclimbrr'
+      realName: 'Sophie'
       location: 'New Zealand (find out the proper name she says)'
       chatter_type: 'known'
       aspirations: 'To get into the tech industry'
@@ -153,6 +188,10 @@ requestOAuthToken()
       first_chatted: 2023-03-01
       last_chatted: 2023-03-01
       chatter_type: 'known'
+    - username: 'ragonbeer',
+      chatter_type: 'known',
+      first_chatted: '2023-08-31',
+      last_chatted: '2023-08-31'
     `;
 
 const yaml = require('js-yaml');
