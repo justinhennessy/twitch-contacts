@@ -47,59 +47,6 @@ requestOAuthToken()
 
     const yamlStr = `
     people:
-    - username: 'Razio_IoT'
-      last_chatted: 2023-07-25
-      first_chatted: 2023-07-25
-      location: 'Belgium'
-      chatter_type: 'known'
-      journal:
-        - Date: 2023-07-25
-          Entry: 'they said: you sound american...'
-        - Date: 2023-07-25
-          Entry: 'Im doing software for a company that makes concrete products...'
-        - Date: 2023-07-25
-          Entry: 'I have small knowledge of several things... c#, java, python'
-        - Date: 2023-07-25
-          Entry: 'started to play (guitar) 2 years ago but stopped... lack of time...'
-    - username: 'samlepolisson'
-      last_chatted: 2023-08-31
-      first_chatted: 2023-06-30
-      location: 'France'
-      journal:
-        - Date: 2023-06-30
-          Entry: 'lives in south of france'
-        - Date: 2023-06-30
-          Entry: 'he said he was about to sit an exam at school'
-      chatter_type: 'known'
-      song_requests:
-        - Date: 2023-07-04
-          Entry: 'Shape of my heart'
-    - username: 'StarKidPep'
-      chatter_type: 'known'
-      location: 'UK'
-      journal:
-        - Date: 2023-07-13
-          Entry: 'Has 4 guitars, 2 electrics and 2 acoustic, 2 epiphones slack edition, a PRS and a Taylor, was looking for a 5th, 12 string'
-        - Date: 2023-07-13
-          Entry: 'knows nzclimbrr'
-        - Date: 2023-07-13
-          Entry: 'he has dabbled with a looper but without success, Im much better just doing straight thythm guitar strumming'
-        - Date: 2023-07-13
-          Entry: 'a night person so Ill be up til at least 2 or 3 am'
-        - Date: 2023-07-13
-          Entry: 'not currently working but that is very much my area of knowledge'
-        - Date: 2023-07-25
-          Entry: '12 string guitar: I got a Martin... cant remember the specific model'
-      first_chatted: 2023-07-13
-      last_chatted: 2023-07-25
-    - username: 'calvinwillplay'
-      chatter_type: 'known'
-      first_chatted: 2023-07-11
-      last_chatted: 2023-07-11
-      location: 'Brisbane'
-      journal:
-        - Date: 2023-07-11
-          Entry: 'I was on the voice Australia 2016 and got to the top 24, have performed since I was 16 and took a little break but just getting back into it'
     - username: 'mirrors123456'
       chatter_type: 'known'
       first_chatted: 2023-06-13
@@ -111,6 +58,27 @@ requestOAuthToken()
       song_requests:
         - Date: 2023-06-13
           Entry: 'Hotel California'
+    - username: 'samlepolisson'
+      last_chatted: 2023-09-05
+      first_chatted: 2023-06-30
+      location: 'France'
+      journal:
+        - Date: 2023-06-30
+          Entry: 'lives in south of france'
+        - Date: 2023-09-05
+          Entry: 'He is in his last year of high school, not sure what he wants to do but he is doing mostly STEM'
+        - Date: 2023-09-05
+          Entry: 'He lives in the south of france and his grand parents are in the french alps'
+      chatter_type: 'known'
+      song_requests:
+        - Date: 2023-07-04
+          Entry: 'Shape of my heart'
+    - username: 'sam_mrtt'
+      location: 'France'
+      journal:
+        - Date: 2023-09-05
+          Entry: 'This is samlepolisson'
+      chatter_type: 'known'
     - username: 'qvvy'
       realName: 'James (Hunter) Bjorkman'
       location: 'Canada'
@@ -121,19 +89,8 @@ requestOAuthToken()
       realName: 'Justin'
       chatter_type: 'known'
       first_chatted: 2023-03-01
-      last_chatted: 2023-03-27
       interaction_count: 0
       location: 'Brisbane'
-      song_requests:
-        - Date: 2023-03-01
-          Entry: 'Wallows - Remember When'
-      journal:
-        - Date: 2023-03-01
-          Entry: 'Doing year 12'
-        - Date: 2023-03-02
-          Entry: 'Doing math and physics'
-        - Date: 2023-03-03
-          Entry: 'He asked me to do something with Wallows - Remember When'
     - username: 'johnsannios'
       location: 'California'
       first_chatted: 2023-04-14
@@ -179,7 +136,6 @@ requestOAuthToken()
       realName: 'Eden'
       chatter_type: 'known'
     - username: 'nbclimbrr'
-      realName: 'Sophie'
       location: 'New Zealand (find out the proper name she says)'
       chatter_type: 'known'
       aspirations: 'To get into the tech industry'
@@ -188,10 +144,6 @@ requestOAuthToken()
       first_chatted: 2023-03-01
       last_chatted: 2023-03-01
       chatter_type: 'known'
-    - username: 'ragonbeer',
-      chatter_type: 'known',
-      first_chatted: '2023-08-31',
-      last_chatted: '2023-08-31'
     `;
 
 const yaml = require('js-yaml');
