@@ -47,6 +47,24 @@ requestOAuthToken()
 
     const yamlStr = `
     people:
+    - username: 'StarKidPep'
+      chatter_type: 'known'
+      first_chatted: 2023-06-30
+      last_chatted: 2023-09-09
+      location: 'UK'
+      journal:
+        - Date: 2023-09-09
+          Entry: 'Has 5 guitars with 2 ukuleles, a banjolele and a 12 string'
+    - username: 'phoen11x__rising'
+      chatter_type: 'known'
+      first_chatted: 2023-09-09
+      last_chatted: 2023-09-09
+      journal:
+        - Date: 2023-09-09
+          Entry: 'She streams, Mental health, nature and outdoors, wos...variety'
+        - Date: 2023-09-11
+          Entry: 'North Carolina and South Carolina, considered collectively. They are bordered by Virginia to the north, Tennessee to the west, and Georgia to the southwest. The Atlantic Ocean is to the east.'
+      location: 'East Coast USA, Carolinas'
     - username: 'mirrors123456'
       chatter_type: 'known'
       first_chatted: 2023-06-13
@@ -58,7 +76,8 @@ requestOAuthToken()
       song_requests:
         - Date: 2023-06-13
           Entry: 'Hotel California'
-    - username: 'samlepolisson'
+    - username: 'sam_mrtt'
+      alternate: 'samlepolisson'
       last_chatted: 2023-09-05
       first_chatted: 2023-06-30
       location: 'France'
@@ -73,12 +92,6 @@ requestOAuthToken()
       song_requests:
         - Date: 2023-07-04
           Entry: 'Shape of my heart'
-    - username: 'sam_mrtt'
-      location: 'France'
-      journal:
-        - Date: 2023-09-05
-          Entry: 'This is samlepolisson'
-      chatter_type: 'known'
     - username: 'qvvy'
       realName: 'James (Hunter) Bjorkman'
       location: 'Canada'
