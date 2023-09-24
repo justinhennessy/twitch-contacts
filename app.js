@@ -4,6 +4,7 @@ const path = require('path');
 const tmi = require('tmi.js');
 const dotenv = require('dotenv');
 const util = require('util');
+const yaml = require('js-yaml');
 
 const express = require('express');
 const app = express();
@@ -19,7 +20,6 @@ requestOAuthToken()
             identity: {
                 username: process.env.TWITCH_BOT_USERNAME,
                 password: process.env.TWITCH_OAUTH_TOKEN
-                //password: '4frmcsnglmi370n8sjupfh95m3zlsc'
             },
             channels: [
                 process.env.TWITCH_CHANNEL_NAME
@@ -45,121 +45,8 @@ requestOAuthToken()
         console.error('Error while requesting OAuth token:', error);
     });
 
-    const yamlStr = `
-    people:
-    - username: 'StarKidPep'
-      chatter_type: 'known'
-      first_chatted: 2023-06-30
-      last_chatted: 2023-09-09
-      location: 'UK'
-      journal:
-        - Date: 2023-09-09
-          Entry: 'Has 5 guitars with 2 ukuleles, a banjolele and a 12 string'
-    - username: 'phoen11x__rising'
-      chatter_type: 'known'
-      first_chatted: 2023-09-09
-      last_chatted: 2023-09-09
-      journal:
-        - Date: 2023-09-09
-          Entry: 'She streams, Mental health, nature and outdoors, wos...variety'
-        - Date: 2023-09-11
-          Entry: 'North Carolina and South Carolina, considered collectively. They are bordered by Virginia to the north, Tennessee to the west, and Georgia to the southwest. The Atlantic Ocean is to the east.'
-      location: 'East Coast USA, Carolinas'
-    - username: 'mirrors123456'
-      chatter_type: 'known'
-      first_chatted: 2023-06-13
-      last_chatted: 2023-06-13
-      location: 'Hong Kong'
-      journal:
-        - Date: 2023-06-13
-          Entry: 'First person to use my song list command'
-      song_requests:
-        - Date: 2023-06-13
-          Entry: 'Hotel California'
-    - username: 'sam_mrtt'
-      alternate: 'samlepolisson'
-      last_chatted: 2023-09-05
-      first_chatted: 2023-06-30
-      location: 'France'
-      journal:
-        - Date: 2023-06-30
-          Entry: 'lives in south of france'
-        - Date: 2023-09-05
-          Entry: 'He is in his last year of high school, not sure what he wants to do but he is doing mostly STEM'
-        - Date: 2023-09-05
-          Entry: 'He lives in the south of france and his grand parents are in the french alps'
-      chatter_type: 'known'
-      song_requests:
-        - Date: 2023-07-04
-          Entry: 'Shape of my heart'
-    - username: 'qvvy'
-      realName: 'James (Hunter) Bjorkman'
-      location: 'Canada'
-      chatter_type: 'known'
-      first_chatted: 2023-06-30
-      last_chatted: 2023-06-30
-    - username: 'JustinHennessy'
-      realName: 'Justin'
-      chatter_type: 'known'
-      first_chatted: 2023-03-01
-      interaction_count: 0
-      location: 'Brisbane'
-    - username: 'johnsannios'
-      location: 'California'
-      first_chatted: 2023-04-14
-      chatter_type: 'known'
-    - username: '3ply_Unlimited'
-      realName: 'Matt'
-      location: 'Brisbane'
-      chatter_type: 'known'
-      first_chatted: 2022-06-01
-      last_chatted: 2023-04-27
-    - username: 'Christian12wg'
-      realName: ''
-      chatter_type: 'known'
-      first_chatted: 2023-03-01
-      last_chatted: 2023-04-27
-      interaction_count: 0
-      location: 'Denmark'
-      aspirations: 'Working on a career in Counter Strike GO'
-      song_requests:
-        - Date: 2023-03-01
-          Entry: 'Wallows - Remember When'
-      journal:
-        - Date: 2023-03-01
-          Entry: 'Doing year 12, finishes end of 2023'
-        - Date: 2023-03-02
-          Entry: 'Doing math and physics'
-        - Date: 2023-03-03
-          Entry: 'He asked me to do something with Wallows - Remember When'
-    - username: 'Nightbot'
-      chatter_type: 'bot'
-    - username: 'SonglistBot'
-      chatter_type: 'bot'
-    - username: 'kiwismoot'
-      chatter_type: 'known'
-      first_chatted: 2023-03-10
-      last_chatted: 2023-04-10
-      location: 'Brisbane'
-    - username: 'sery_bot'
-      chatter_type: 'bot'
-    - username: 'StreamElements'
-      chatter_type: 'bot'
-    - username: 'allistair10'
-      realName: 'Eden'
-      chatter_type: 'known'
-    - username: 'nbclimbrr'
-      location: 'New Zealand (find out the proper name she says)'
-      chatter_type: 'known'
-      aspirations: 'To get into the tech industry'
-      first_chatted: 2023-03-01
-    - username: 'RecklessPelican'
-      first_chatted: 2023-03-01
-      last_chatted: 2023-03-01
-      chatter_type: 'known'
-    `;
 
-const yaml = require('js-yaml');
+const yamlStr = fs.readFileSync('people.yaml', 'utf8');
 
 class Person {
     constructor(username, realName, location = '', chatter_type = 'unknown', interaction_count = 0, aspirations = '', song_requests = [], journal = [], message_count = 0) {
@@ -254,17 +141,42 @@ app.get('/', (req, res) => {
   });
 });
 
+// app.post('/log', (req, res) => {
+//   let body = '';
+//     req.on('data', chunk => {
+//       body += chunk.toString();
+//     });
+//     req.on('end', () => {
+//       const data = JSON.parse(body);
+//       console.log('Data logged from client:', util.inspect(data, { depth: null }));
+//       res.end();
+//     });
+//   console.log(message_count);
+// });
+// 
+
 app.post('/log', (req, res) => {
   let body = '';
-    req.on('data', chunk => {
-      body += chunk.toString();
+  req.on('data', chunk => {
+    body += chunk.toString();
+  });
+  req.on('end', () => {
+    const data = JSON.parse(body);
+    const logMessage = 'Data logged from client: ' + util.inspect(data, { depth: null });
+
+    // Log to console
+    console.log(logMessage);
+
+    // Convert data to YAML
+    const yamlStr = yaml.dump(data);
+
+    // Write to update.yaml (write-only, not append)
+    fs.writeFile('update.yaml', yamlStr, { flag: 'w' }, (err) => {
+      if (err) throw err;
     });
-    req.on('end', () => {
-      const data = JSON.parse(body);
-      console.log('Data logged from client:', util.inspect(data, { depth: null }));
-      res.end();
-    });
-  console.log(message_count);
+
+    res.end();
+  });
 });
 
 // Expose message_count as a JSON endpoint
