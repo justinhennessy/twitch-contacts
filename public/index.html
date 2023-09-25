@@ -1,93 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact List</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="/js/date_time.js"></script>
+  <meta charset="UTF-8">
+  <title>People Tables</title>
+  <link rel="stylesheet" href="style/styles.css">
 </head>
-
 <body>
-    <div id="contact-list"></div>
-    <script src="/js/people.js"></script>
-    <script src="/js/message_count.js"></script>
-    <script src="/js/main.js"></script>
-    <script>
-        function getSphereColor(chatter_type) {
-            switch (chatter_type) {
-                case 'known':
-                    return '#90EE90';
-                case 'unknown':
-                    return '#D3D3D3';
-                case 'bot':
-                    return '#FFA500';
-                case 'vip':
-                    return '#FFD700';
-                default:
-                    return '#D3D3D3';
-            }
-        }
-
-        function renderList(list) {
-            if (!list || !Array.isArray(list)) {
-                return '';
-            }
-
-            // Sort the list by date in descending order
-            const sortedList = list.slice().sort(sortByDateDescending);
-
-            return sortedList.map(item => {
-                const date = formatDate(item.Date);
-                const entry = item.Entry || 'unknown';
-                return `${date}: ${entry}`;
-            }).join('\n');
-        }
-
-        function createPersonElement(person) {
-            const personContainer = document.createElement('div');
-            const sphereContainer = document.createElement('div'); // Create sphere-container
-            const sphere = document.createElement('div');
-            const details = document.createElement('div');
-            const username = document.createElement('p');
-            const hoverModal = document.createElement('div');
-
-            personContainer.className = 'person-container';
-            sphereContainer.className = 'sphere-container'; // Add class to sphere-container
-            sphere.className = 'sphere';
-            details.className = 'details';
-            hoverModal.className = 'hover-modal rounded';
-
-            username.innerText = `${person.username}\n`;
-
-            const realName = person.realName ? `Name: ${person.realName}\n` : '';
-            const chatterType = `Type: ${person.chatter_type}\n`;
-            const firstChat = person.first_chatted ? `First Chat: ${timeSince(person.first_chatted)}\n` : '';
-            const lastChat = person.last_chatted ? `Last Chat: ${timeSince(person.last_chatted)}\n` : '';
-            const aspirations = person.aspirations ? `Aspirations: ${person.aspirations}\n` : '';
-            const songRequests = person.song_requests?.length ? `\nSong Requests:\n${renderList(person.song_requests)}\n` : '';
-            const journal = person.journal?.length ? `\nJournal:\n${renderList(person.journal)}\n` : '';
-
-            hoverModal.innerText = `${chatterType}${realName}${firstChat}${lastChat}${aspirations}${songRequests}${journal}`;
-
-            details.appendChild(username);
-            personContainer.appendChild(sphereContainer);
-            sphereContainer.appendChild(sphere);
-            sphere.appendChild(hoverModal);
-            personContainer.appendChild(details);
-
-            const sphereElement = document.querySelector('.sphere');
-            const hoverModalElement = document.querySelector('.hover-modal');
-
-            if (sphereElement && hoverModalElement) {
-                console.log(sphereContainer.parentNode);
-            }
-
-            return personContainer;
-        };
-
-    </script>
+  <div id="app"></div>
+  <div id="modal">
+    <div id="modal-content">
+      <span class="close">&times;</span>
+      <p id="modal-text"></p>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
 </body>
-
 </html>
