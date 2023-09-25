@@ -1,152 +1,281 @@
 data:
-  - username: rizzardofsus
-    chatter_type: known
-    first_chatted: '2023-09-14T00:00:00.000Z'
-    last_chatted: '2023-09-14T00:00:00.000Z'
-    location: Brighton, England
-    journal:
-      - Date: '2023-09-14T00:00:00.000Z'
-        Entry: As of today, they have been playing guitar almost a year now
-      - Date: '2023-09-14T00:00:00.000Z'
-        Entry: First guitar was acoustic, then their parents got them an electric
-      - Date: '2023-09-14T00:00:00.000Z'
-        Entry: >-
-          Likes James Blunt and is going to see him. They also like zach bryan
-          and his song something in the orange
-      - Date: '2023-09-14T00:00:00.000Z'
-        Entry: recently went to an australian band called sametime
-      - Date: '2023-09-14T00:00:00.000Z'
-        Entry: the hardest song i have learned is wonderful tonight, eric clapton
-  - username: SteggyMusic
-    chatter_type: known
-    first_chatted: '2023-09-14T00:00:00.000Z'
-    last_chatted: '2023-09-19T00:00:00.000Z'
-    location: ''
-    journal:
-      - Date: '2023-09-19T00:00:00.000Z'
-        Entry: >-
-          He was working in this today. C E7 F Fm (I think he corrected himself
-          to Emaj7)
-  - username: StarKidPep
-    chatter_type: known
-    first_chatted: '2023-06-30T00:00:00.000Z'
-    last_chatted: '2023-09-09T00:00:00.000Z'
-    location: UK
-    journal:
-      - Date: '2023-09-09T00:00:00.000Z'
-        Entry: Has 5 guitars with 2 ukuleles, a banjolele and a 12 string
-  - username: phoen11x__rising
-    chatter_type: known
-    first_chatted: '2023-09-09T00:00:00.000Z'
-    last_chatted: '2023-09-19T00:00:00.000Z'
-    journal:
-      - Date: '2023-09-09T00:00:00.000Z'
-        Entry: She streams, Mental health, nature and outdoors, wos...variety
-      - Date: '2023-09-11T00:00:00.000Z'
-        Entry: >-
-          North Carolina and South Carolina, considered collectively. They are
-          bordered by Virginia to the north, Tennessee to the west, and Georgia
-          to the southwest. The Atlantic Ocean is to the east.
-      - Date: '2023-09-19T00:00:00.000Z'
-        Entry: She is a mod for a lot of channels
-    location: East Coast USA, Carolinas
-  - username: mirrors123456
-    chatter_type: known
-    first_chatted: '2023-06-13T00:00:00.000Z'
-    last_chatted: '2023-06-13T00:00:00.000Z'
-    location: Hong Kong
-    journal:
-      - Date: '2023-06-13T00:00:00.000Z'
-        Entry: First person to use my song list command
-    song_requests:
-      - Date: '2023-06-13T00:00:00.000Z'
-        Entry: Hotel California
-  - username: sam_mrtt
-    alternate: samlepolisson
-    last_chatted: '2023-09-19T00:00:00.000Z'
-    first_chatted: '2023-06-30T00:00:00.000Z'
-    location: France
-    journal:
-      - Date: '2023-06-30T00:00:00.000Z'
-        Entry: lives in south of france
-      - Date: '2023-09-05T00:00:00.000Z'
-        Entry: >-
-          He is in his last year of high school, not sure what he wants to do
-          but he is doing mostly STEM
-      - Date: '2023-09-05T00:00:00.000Z'
-        Entry: >-
-          He lives in the south of france and his grand parents are in the
-          french alps
-    chatter_type: known
-    song_requests:
-      - Date: '2023-07-04T00:00:00.000Z'
-        Entry: Shape of my heart
-  - username: qvvy
-    realName: James (Hunter) Bjorkman
-    location: Canada
-    chatter_type: known
-    first_chatted: '2023-06-30T00:00:00.000Z'
-    last_chatted: '2023-06-30T00:00:00.000Z'
-  - username: JustinHennessy
-    realName: Justin
-    chatter_type: known
-    first_chatted: '2023-03-01T00:00:00.000Z'
-    interaction_count: 2
-    location: Brisbane
-    message_count: 1
-    last_chatted: '2023-09-19'
-  - username: johnsannios
-    location: California
-    first_chatted: '2023-04-14T00:00:00.000Z'
-    chatter_type: known
-  - username: 3ply_Unlimited
-    realName: Matt
-    location: Brisbane
-    chatter_type: known
-    first_chatted: '2022-06-01T00:00:00.000Z'
-    last_chatted: '2023-09-14T00:00:00.000Z'
-  - username: Christian12wg
-    realName: ''
-    chatter_type: known
-    first_chatted: '2023-03-01T00:00:00.000Z'
-    last_chatted: '2023-04-27T00:00:00.000Z'
-    interaction_count: 0
-    location: Denmark
-    aspirations: Working on a career in Counter Strike GO
-    song_requests:
-      - Date: '2023-03-01T00:00:00.000Z'
-        Entry: Wallows - Remember When
-    journal:
-      - Date: '2023-03-01T00:00:00.000Z'
-        Entry: Doing year 12, finishes end of 2023
-      - Date: '2023-03-02T00:00:00.000Z'
-        Entry: Doing math and physics
-      - Date: '2023-03-03T00:00:00.000Z'
-        Entry: He asked me to do something with Wallows - Remember When
-  - username: Nightbot
-    chatter_type: bot
-  - username: SonglistBot
-    chatter_type: bot
-  - username: Sery_Bot
-    chatter_type: bot
-  - username: kiwismoot
-    chatter_type: known
-    first_chatted: '2023-03-10T00:00:00.000Z'
-    last_chatted: '2023-04-10T00:00:00.000Z'
-    location: Brisbane
-  - username: sery_bot
-    chatter_type: bot
-  - username: StreamElements
-    chatter_type: bot
-  - username: allistair10
-    realName: Eden
-    chatter_type: known
-  - username: nbclimbrr
-    location: New Zealand (find out the proper name she says)
-    chatter_type: known
-    aspirations: To get into the tech industry
-    first_chatted: '2023-03-01T00:00:00.000Z'
-  - username: RecklessPelican
-    first_chatted: '2023-03-01T00:00:00.000Z'
-    last_chatted: '2023-03-01T00:00:00.000Z'
-    chatter_type: known
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-09-14T00:00:00.000Z'
+  interaction_count: 0
+  journal:
+  - Date: '2023-09-14T00:00:00.000Z'
+    Entry: As of today, they have been playing guitar almost a year now
+  - Date: '2023-09-14T00:00:00.000Z'
+    Entry: First guitar was acoustic, then their parents got them an electric
+  - Date: '2023-09-14T00:00:00.000Z'
+    Entry: Likes James Blunt and is going to see him. They also like zach bryan and
+      his song something in the orange
+  - Date: '2023-09-14T00:00:00.000Z'
+    Entry: recently went to an australian band called sametime
+  - Date: '2023-09-14T00:00:00.000Z'
+    Entry: the hardest song i have learned is wonderful tonight, eric clapton
+  last_chatted: '2023-09-14T00:00:00.000Z'
+  location: Brighton, England
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: rizzardofsus
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-09-14T00:00:00.000Z'
+  interaction_count: 0
+  journal:
+  - Date: '2023-09-19T00:00:00.000Z'
+    Entry: He was working in this today. C E7 F Fm (I think he corrected himself to
+      Emaj7)
+  last_chatted: '2023-09-19T00:00:00.000Z'
+  location: ''
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: SteggyMusic
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-06-30T00:00:00.000Z'
+  interaction_count: 0
+  journal:
+  - Date: '2023-09-09T00:00:00.000Z'
+    Entry: Has 5 guitars with 2 ukuleles, a banjolele and a 12 string
+  last_chatted: '2023-09-09T00:00:00.000Z'
+  location: UK
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: StarKidPep
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-09-09T00:00:00.000Z'
+  interaction_count: 0
+  journal:
+  - Date: '2023-09-09T00:00:00.000Z'
+    Entry: She streams, Mental health, nature and outdoors, wos...variety
+  - Date: '2023-09-11T00:00:00.000Z'
+    Entry: North Carolina and South Carolina, considered collectively. They are bordered
+      by Virginia to the north, Tennessee to the west, and Georgia to the southwest.
+      The Atlantic Ocean is to the east.
+  - Date: '2023-09-19T00:00:00.000Z'
+    Entry: She is a mod for a lot of channels
+  last_chatted: '2023-09-19T00:00:00.000Z'
+  location: East Coast USA, Carolinas
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: phoen11x__rising
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-06-13T00:00:00.000Z'
+  interaction_count: 0
+  journal:
+  - Date: '2023-06-13T00:00:00.000Z'
+    Entry: First person to use my song list command
+  last_chatted: '2023-06-13T00:00:00.000Z'
+  location: Hong Kong
+  message_count: 0
+  realName: null
+  song_requests:
+  - Date: '2023-06-13T00:00:00.000Z'
+    Entry: Hotel California
+  username: mirrors123456
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-06-30T00:00:00.000Z'
+  interaction_count: 0
+  journal:
+  - Date: '2023-06-30T00:00:00.000Z'
+    Entry: lives in south of france
+  - Date: '2023-09-05T00:00:00.000Z'
+    Entry: He is in his last year of high school, not sure what he wants to do but
+      he is doing mostly STEM
+  - Date: '2023-09-05T00:00:00.000Z'
+    Entry: He lives in the south of france and his grand parents are in the french
+      alps
+  last_chatted: '2023-09-19T00:00:00.000Z'
+  location: France
+  message_count: 0
+  realName: null
+  song_requests:
+  - Date: '2023-07-04T00:00:00.000Z'
+    Entry: Shape of my heart
+  username: sam_mrtt
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-06-30T00:00:00.000Z'
+  interaction_count: 0
+  journal: null
+  last_chatted: '2023-06-30T00:00:00.000Z'
+  location: Canada
+  message_count: 0
+  realName: James (Hunter) Bjorkman
+  song_requests: null
+  username: qvvy
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-04-14T00:00:00.000Z'
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: California
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: johnsannios
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2022-06-01T00:00:00.000Z'
+  interaction_count: 0
+  journal: null
+  last_chatted: '2023-09-14T00:00:00.000Z'
+  location: Brisbane
+  message_count: 0
+  realName: Matt
+  song_requests: null
+  username: 3ply_Unlimited
+- aspirations: Working on a career in Counter Strike GO
+  chatter_type: known
+  first_chatted: '2023-03-01T00:00:00.000Z'
+  interaction_count: 0
+  journal:
+  - Date: '2023-03-01T00:00:00.000Z'
+    Entry: Doing year 12, finishes end of 2023
+  - Date: '2023-03-02T00:00:00.000Z'
+    Entry: Doing math and physics
+  - Date: '2023-03-03T00:00:00.000Z'
+    Entry: He asked me to do something with Wallows - Remember When
+  last_chatted: '2023-04-27T00:00:00.000Z'
+  location: Denmark
+  message_count: 0
+  realName: ''
+  song_requests:
+  - Date: '2023-03-01T00:00:00.000Z'
+    Entry: Wallows - Remember When
+  username: Christian12wg
+- aspirations: null
+  chatter_type: bot
+  first_chatted: null
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: null
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: Nightbot
+- aspirations: null
+  chatter_type: bot
+  first_chatted: null
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: null
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: SonglistBot
+- aspirations: null
+  chatter_type: bot
+  first_chatted: null
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: null
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: Sery_Bot
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-03-10T00:00:00.000Z'
+  interaction_count: 0
+  journal: null
+  last_chatted: '2023-04-10T00:00:00.000Z'
+  location: Brisbane
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: kiwismoot
+- aspirations: null
+  chatter_type: bot
+  first_chatted: null
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: null
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: sery_bot
+- aspirations: null
+  chatter_type: bot
+  first_chatted: null
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: null
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: StreamElements
+- aspirations: null
+  chatter_type: known
+  first_chatted: null
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: null
+  message_count: 0
+  realName: Eden
+  song_requests: null
+  username: allistair10
+- aspirations: To get into the tech industry
+  chatter_type: known
+  first_chatted: '2023-03-01T00:00:00.000Z'
+  interaction_count: 0
+  journal: null
+  last_chatted: null
+  location: New Zealand (find out the proper name she says)
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: nbclimbrr
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-03-01T00:00:00.000Z'
+  interaction_count: 0
+  journal: null
+  last_chatted: '2023-03-01T00:00:00.000Z'
+  location: null
+  message_count: 0
+  realName: null
+  song_requests: null
+  username: RecklessPelican
+- aspirations: []
+  chatter_type: known
+  first_chatted: '2023-09-25'
+  interaction_count: []
+  journal: []
+  last_chatted: '2023-09-26'
+  location: ''
+  message_count: 387
+  realName: ''
+  song_requests: 1
+  username: justinhennessy
+- aspirations: null
+  chatter_type: known
+  first_chatted: '2023-09-26'
+  interaction_count: 0
+  journal:
+  - Date: '2023-09-26'
+    Entry: Dropped im right at the end of their first appearance, give them some love
+      next time
+  last_chatted: '2023-09-26'
+  location: ''
+  message_count: null
+  realName: null
+  song_requests: null
+  username: ChrisTeeEss
