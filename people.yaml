@@ -279,7 +279,9 @@ data:
   last_chatted: ''
   message_count: 0
   realName: ''
-  journal: []
+  journal:
+  - Date: '2023-09-28'
+    Entry: 'Was invited by rahomo, "makr_plays: that's alright, rahomo told me to come here or he would [censored]" '
 
 # - username: ''
 #   location: ''
