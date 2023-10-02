@@ -40,6 +40,15 @@ function createUsernameCell(item) {
         modalHandler.updateContent(item);
     });
     tdUsername.appendChild(link);
+
+    tippy(tdUsername, {
+        content: `
+            First Chatted: ${item.first_chatted ? item.first_chatted : 'not yet'}<br>
+            Last Chatted: ${item.last_chatted}
+        `,
+        allowHTML: true,
+    });
+
     return tdUsername;
 }
 
@@ -78,7 +87,8 @@ function getTimeZone(location) {
         'Brisbane': 'Australia/Brisbane',
         'Denmark': 'Europe/Copenhagen',
         'New Zealand': 'Pacific/Auckland',
-        // ... other locations
+
+        // https://chat.openai.com/share/4340f5c7-5f07-4b31-bd42-1e912b32532c use this link if you want to get more timezones added.
     };
     return locationToTimeZone[location];
 }
