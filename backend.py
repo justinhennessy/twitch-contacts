@@ -3,9 +3,19 @@ import yaml
 from dotenv import load_dotenv
 from oauth import request_oauth_token
 from datetime import datetime
+import logging
+from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__, static_folder='public')
 load_dotenv()
+
+# Configure logging
+logging.basicConfig(filename='app.log', level=logging.INFO, format='%(asctime)s [Process %(process)d] [%(levelname)s] - %(message)s')
+
+handler = RotatingFileHandler('app.log', maxBytes=5*1024*1024, backupCount=5)
+logging.getLogger().addHandler(handler)
+
+logger = logging.getLogger(__name__)
 
 class Person:
     def __init__(self, username, real_name, first_chatted, last_chatted, location='', chatter_type='unknown', interaction_count=0, aspirations='', song_requests=[], journal=[], message_count=0):
