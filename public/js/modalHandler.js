@@ -53,32 +53,34 @@ export class ModalHandler {
     }
 
     async addJournalEntry(item, entry) {
-      try {
-          const response = await fetch('http://127.0.0.1:3000/journal', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                  username: item.username,
-                  entry: entry,
-              }),
-          });
+        try {
+            const response = await fetch('http://127.0.0.1:3000/journal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: item.username,
+                    entry: entry,
+                }),
+            });
 
-          const data = await response.json();
-          if (data.message) {
-              alert(data.message);
-              const newEntry = {
-                  date: new Date().toISOString().split('T')[0],
-                  entry: entry
-              };
-              item.journal.push(newEntry);
-              this.updateContent(item);  // Refresh the journal modal content
-          } else {
-              alert('Error updating journal.');
-          }
-      } catch (error) {
-          console.error('Error:', error);
-      }
+            const data = await response.json();
+            if (data.message) {
+                alert(data.message);
+                const newEntry = {
+                    date: new Date().toISOString().split('T')[0],
+                    entry: entry
+                };
+                item.journal.push(newEntry);
+                this.close();  // Close the modal
+                location.reload();  // Reload the page
+            } else {
+                alert('Error updating journal.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
   }
+
