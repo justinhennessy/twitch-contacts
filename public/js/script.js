@@ -73,13 +73,156 @@ document.addEventListener('DOMContentLoaded', function() {
     link.textContent = item.username;
     link.addEventListener('click', () => {
       modal.style.display = 'block';
-      modalContent.innerHTML = `<p><strong>Song Requests:</strong> ${item.song_requests ? item.song_requests.join(', ') : '-'}</p>`;
+      modalContent.innerHTML = '';
+      
+      const journalHeader = document.createElement('h3');
+      journalHeader.textContent = 'Journal';
+      modalContent.appendChild(journalHeader);
+    
       if (item.journal && item.journal.length > 0) {
-        modalContent.innerHTML += item.journal.map(entry => `<p><strong>Date:</strong> ${new Date(entry.Date).toLocaleDateString()}<br><strong>Entry:</strong> ${entry.Entry}</p>`).join('');
+        // Sort by date descending
+        item.journal.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        // Limit to 10 entries
+        const limitedJournal = item.journal.slice(0, 10);
+        
+        limitedJournal.forEach(entry => {
+          const entryPara = document.createElement('p');
+          entryPara.innerHTML = `${new Date(entry.date).toLocaleDateString()}<br>${entry.entry}`;
+          modalContent.appendChild(entryPara);
+        });
       } else {
-        modalContent.innerHTML += '<p>No journal entries available.</p>';
+        const noEntriesPara = document.createElement('p');
+        noEntriesPara.textContent = 'No journal entries available.';
+        modalContent.appendChild(noEntriesPara);
       }
+
+      const addEntryButton = document.createElement('button');
+      addEntryButton.textContent = '+';
+      addEntryButton.style.fontSize = '24px';
+      addEntryButton.style.marginTop = '10px';
+      modalContent.appendChild(addEntryButton);
+
+      attachAddEntryEventListener(addEntryButton, item);
+
+      refreshJournalModalContent(item, false);
+
+      addEntryButton.addEventListener('click', () => {
+        const entryPrompt = prompt('Enter your journal entry:');
+        if (entryPrompt) {
+            fetch('http://127.0.0.1:3000/journal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: item.username,
+                    entry: entryPrompt,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                    // Update the item.journal array and refresh the journal modal content
+                    const newEntry = {
+                        date: new Date().toISOString().split('T')[0],  // Get today's date in YYYY-MM-DD format
+                        entry: entryPrompt
+                    };
+                    item.journal.push(newEntry);  // Add the new entry to the item.journal array
+                    refreshJournalModalContent(item);  // Refresh the journal modal content
+                } else {
+                    alert('Error updating journal.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+      });
+
+      function refreshJournalModalContent(item, addNewButton = true) {
+        // ... rest of your code ...
+    
+        if (addNewButton) {
+            // Re-add the add entry button to the modal content
+            const addEntryButton = document.createElement('button');
+            addEntryButton.textContent = '+';
+            addEntryButton.style.fontSize = '24px';
+            addEntryButton.style.marginTop = '10px';
+            modalContent.appendChild(addEntryButton);
+    
+            attachAddEntryEventListener(addEntryButton, item);  // Re-attach the event listener
+        }
+      }
+
+      function attachAddEntryEventListener(button, item) {
+        button.addEventListener('click', () => {
+            const entryPrompt = prompt('Enter your journal entry:');
+            if (entryPrompt) {
+                fetch('http://127.0.0.1:3000/journal', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: item.username,
+                        entry: entryPrompt,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                        const newEntry = {
+                            date: new Date().toISOString().split('T')[0],
+                            entry: entryPrompt
+                        };
+                        item.journal.push(newEntry);
+                        refreshJournalModalContent(item);
+                    } else {
+                        alert('Error updating journal.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+      }
+
+      function refreshJournalModalContent(item) {
+        modalContent.innerHTML = '';  // Clear the existing modal content
+        
+        const journalHeader = document.createElement('h3');
+        journalHeader.textContent = 'Journal';
+        modalContent.appendChild(journalHeader);
+        
+        if (item.journal && item.journal.length > 0) {
+            // Sort by date descending
+            item.journal.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Limit to 10 entries
+            const limitedJournal = item.journal.slice(0, 10);
+            
+            limitedJournal.forEach(entry => {
+                const entryPara = document.createElement('p');
+                entryPara.innerHTML = `${new Date(entry.date).toLocaleDateString()}<br>${entry.entry}`;
+                modalContent.appendChild(entryPara);
+            });
+        } else {
+            const noEntriesPara = document.createElement('p');
+            noEntriesPara.textContent = 'No journal entries available.';
+            modalContent.appendChild(noEntriesPara);
+        }
+    
+        // Re-add the add entry button to the modal content
+        const addEntryButton = document.createElement('button');
+        addEntryButton.textContent = '+';
+        addEntryButton.style.fontSize = '24px';
+        addEntryButton.style.marginTop = '10px';
+        modalContent.appendChild(addEntryButton);
+        
+        attachAddEntryEventListener(addEntryButton, item);
+      }      
     });
+
     tdUsername.appendChild(link);
     tr.appendChild(tdUsername);
 
