@@ -90,50 +90,47 @@ def log():
 
 @app.route('/message_count', methods=['POST'])
 def message_count():
-    # Get the username from the request data
     data = request.json
     username = data.get('username')
 
     if not username:
         return jsonify({"error": "Username not provided"}), 400
 
-    # Load the list of people data from the YAML file
     with open('people.yaml', 'r') as file:
-        yaml_str = file.read()
+        people_list = yaml.safe_load(file)['data']
 
-    people_list = load_people_data_from_yaml(yaml_str)
-    
-    # Find the user with the provided username
     user_found = False
     for person in people_list:
-        if person.username.lower() == username.lower():
-            # Increment the message count
-            person.message_count += 1
-            
-            # Update last_chatted to the current date
-            person.last_chatted = datetime.now().strftime("%Y-%m-%d")
-            
+        if person['username'].lower() == username.lower():
             user_found = True
-            break
+            if person['chatter_type'] != 'bot':
+                person['message_count'] += 1
+                person['last_chatted'] = datetime.now().strftime("%Y-%m-%d")
+                action = "incremented"
+                logger.info(f"Message count incremented for user {username}, and last_chatted updated")
+            else:
+                logger.info(f"{person['username'].lower()} was a bot, no changes were made")
+                return jsonify({"message": f"User {username} was a bot, no changes were made"}), 200
 
-    # If the user was not found, add them to the people_list
-    if not user_found:
+    if not user_found and username.lower() != 'bot':
         current_date = datetime.now().strftime("%Y-%m-%d")
-        new_person = Person(username, '', '', '', '', 'known', [], [], 1)
-        new_person.first_chatted = current_date
-        new_person.last_chatted = current_date
+        new_person = {
+            'username': username,
+            'chatter_type': 'known',
+            'message_count': 1,
+            'first_chatted': current_date,
+            'last_chatted': current_date
+        }
         people_list.append(new_person)
-        
-    # Update the YAML file with the new data
-    updated_data = {"data": [vars(person) for person in people_list]}
-    updated_yaml_str = yaml.dump(updated_data)
+        action = "added"
 
+    updated_yaml_str = yaml.dump({"data": people_list})
     with open('people.yaml', 'w') as file:
         file.write(updated_yaml_str)
 
-    if user_found:
+    if action == "incremented":
         return jsonify({"message": f"Message count incremented for user {username}, and last_chatted updated"}), 200
-    else:
+    elif action == "added":
         return jsonify({"message": f"User {username} added and message count incremented"}), 200
 
 @app.route('/people', methods=['GET'])
