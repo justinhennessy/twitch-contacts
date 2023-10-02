@@ -52,7 +52,35 @@ function createRealNameCell(item) {
 function createLocationCell(item) {
     const tdLocation = document.createElement('td');
     tdLocation.textContent = item.location || '-';
+    if (item.location) {
+        const timeZone = getTimeZone(item.location);
+        if (timeZone) {
+            const currentTime = moment.tz(timeZone).format('LLLL');
+            tippy(tdLocation, {
+                content: `${currentTime}`,
+            });
+        }
+    }
     return tdLocation;
+}
+
+function getTimeZone(location) {
+    const locationToTimeZone = {
+        'New York': 'America/New_York',
+        'London': 'Europe/London',
+        'Brighton, England': 'Europe/London', // Assuming Brighton follows the same timezone as London
+        'UK': 'Europe/London',
+        'East Coast USA, Carolinas': 'America/New_York', // Assuming the time zone for the Carolinas is the same as New York
+        'Hong Kong': 'Asia/Hong_Kong',
+        'France': 'Europe/Paris',
+        'Canada': 'America/Toronto', // Note: Canada spans multiple time zones; this is just one example
+        'California': 'America/Los_Angeles',
+        'Brisbane': 'Australia/Brisbane',
+        'Denmark': 'Europe/Copenhagen',
+        'New Zealand': 'Pacific/Auckland',
+        // ... other locations
+    };
+    return locationToTimeZone[location];
 }
 
 function createAspirationsCell(item) {
