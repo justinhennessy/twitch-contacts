@@ -133,6 +133,45 @@ def message_count():
     elif action == "added":
         return jsonify({"message": f"User {username} added and message count incremented"}), 200
 
+@app.route('/journal', methods=['GET', 'POST'])
+def journal():
+
+    if request.method == 'GET':
+        return "I am up", 200
+
+    data = request.json
+    username = data.get('username')
+    entry = data.get('entry')
+
+    if not username or not entry:
+        return jsonify({"error": "Username or entry not provided"}), 400
+
+    with open('people.yaml', 'r') as file:
+        people_list = yaml.safe_load(file)['data']
+
+    user_found = False
+    for person in people_list:
+        if person['username'].lower() == username.lower():
+            user_found = True
+            journal_entry = {
+                'date': datetime.now().strftime("%Y-%m-%d"),
+                'entry': entry
+            }
+            person['journal'].append(journal_entry)
+            break
+
+    if not user_found:
+        return jsonify({"error": f"No user found with username {username}"}), 404
+
+    updated_data = {"data": people_list}
+    updated_yaml_str = yaml.dump(updated_data)
+
+    with open('people.yaml', 'w') as file:
+        file.write(updated_yaml_str)
+
+    return jsonify({"message": f"Journal updated for user {username}"}), 200
+
+
 @app.route('/people', methods=['GET'])
 def people():
     with open('people.yaml', 'r') as file:
