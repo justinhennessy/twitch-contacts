@@ -158,6 +158,7 @@ def journal():
                 'entry': entry
             }
             person['journal'].append(journal_entry)
+            person['chatter_type'] = 'known'
             break
 
     if not user_found:
