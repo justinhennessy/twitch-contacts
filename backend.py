@@ -18,14 +18,13 @@ logging.getLogger().addHandler(handler)
 logger = logging.getLogger(__name__)
 
 class Person:
-    def __init__(self, username, real_name, first_chatted, last_chatted, location='', chatter_type='unknown', interaction_count=0, aspirations='', song_requests=[], journal=[], message_count=0):
+    def __init__(self, username, real_name, first_chatted, last_chatted, location='', chatter_type='unknown', interaction_count=0, aspirations='', journal=[], message_count=0):
         self.username = username
         self.realName = real_name
         self.location = location
         self.chatter_type = chatter_type
         self.interaction_count = interaction_count
         self.aspirations = aspirations
-        self.song_requests = song_requests
         self.message_count = message_count
         self.journal = journal
         self.first_chatted = first_chatted
@@ -46,9 +45,8 @@ def load_people_data_from_yaml(yaml_str):
             person_data.get('chatter_type'),
             person_data.get('interaction_count', 0),
             person_data.get('aspirations'),
-            person_data.get('song_requests'),
             person_data.get('journal'),
-            person_data.get('message_count')
+            person_data.get('message_count', 0)
         )
         people.append(person)
     return people
