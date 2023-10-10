@@ -87,6 +87,9 @@ function getTimeZone(location) {
         'Brisbane': 'Australia/Brisbane',
         'Denmark': 'Europe/Copenhagen',
         'New Zealand': 'Pacific/Auckland',
+        'Chicago': 'America/Chicago',
+        'Finland': 'Europe/Helsinki',
+        'Ohio, USA': 'America/New_York',
 
         // https://chat.openai.com/share/4340f5c7-5f07-4b31-bd42-1e912b32532c use this link if you want to get more timezones added.
     };
