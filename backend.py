@@ -119,7 +119,8 @@ def message_count():
             'chatter_type': 'known',
             'message_count': 1,
             'first_chatted': current_date,
-            'last_chatted': current_date
+            'last_chatted': current_date,
+            'journal': []
         }
         people_list.append(new_person)
         action = "added"
