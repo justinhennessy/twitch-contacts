@@ -2,7 +2,6 @@ data:
 - aspirations: null
   chatter_type: known
   first_chatted: '2023-09-14'
-  interaction_count: 0
   journal:
   - date: '2023-09-14'
     entry: As of today, they have been playing guitar almost a year now
@@ -15,39 +14,41 @@ data:
     entry: recently went to an australian band called sametime
   - date: '2023-09-14'
     entry: the hardest song i have learned is wonderful tonight, eric clapton
+  - date: '2023-10-10'
+    entry: test
   last_chatted: '2023-10-02'
   location: Brighton, England
   message_count: 0
   realName: null
   username: rizzardofsus
-- aspirations: null
+- aspirations: ''
   chatter_type: known
   first_chatted: '2023-09-14'
-  interaction_count: 0
   journal:
   - date: '2023-09-28'
     entry: He is a fulltime musician and streamer
-  last_chatted: '2023-09-19'
-  location: ''
+  - date: '2023-10-03'
+    entry: Entitled song It's a song he wrote about my cousin when he passed away
+      recently
+  last_chatted: '2023-10-10'
+  location: Ohio, USA
   message_count: 0
-  realName: null
-  username: steggmusic
-- aspirations: null
+  realName: ''
+  username: steggymusic
+- aspirations: ''
   chatter_type: known
   first_chatted: '2023-06-30'
-  interaction_count: 0
   journal:
   - date: '2023-09-28'
     entry: Has 5 guitars with 2 ukuleles, a banjolele and a 12 string
-  last_chatted: '2023-09-09'
+  last_chatted: '2023-10-03'
   location: UK
   message_count: 0
-  realName: null
+  realName: ''
   username: starkidpep
-- aspirations: null
+- aspirations: ''
   chatter_type: known
   first_chatted: '2023-09-09'
-  interaction_count: 0
   journal:
   - date: '2023-09-09'
     entry: She streams, Mental health, nature and outdoors, wos...variety
@@ -59,25 +60,23 @@ data:
     entry: She is a mod for a lot of channels
   - date: '2023-09-26'
     entry: She is a HOPE dealer :)
-  last_chatted: '2023-09-19'
+  last_chatted: '2023-10-05'
   location: East Coast USA, Carolinas
   message_count: 0
-  realName: null
+  realName: ''
   username: phoen11x__rising
-- aspirations: null
+- aspirations: ''
   chatter_type: known
   first_chatted: '2023-06-13'
-  interaction_count: 0
-  journal: null
+  journal: []
   last_chatted: '2023-09-28'
   location: Hong Kong
   message_count: 0
-  realName: null
+  realName: ''
   username: mirrors123456
-- aspirations: null
+- aspirations: ''
   chatter_type: known
   first_chatted: '2023-06-30'
-  interaction_count: 0
   journal:
   - date: '2023-06-30'
     entry: lives in south of france
@@ -87,36 +86,40 @@ data:
   - date: '2023-09-05'
     entry: He lives in the south of france and his grand parents are in the french
       alps
-  last_chatted: '2023-09-19'
+  - date: '2023-10-03'
+    entry: my uncle who is a pianist wrote some music some years ago
+  - date: '2023-10-10'
+    entry: i passed my road code (got his learners)
+  - date: '2023-10-10'
+    entry: i just saw that the eiffel tower has been decorated with the flag of israel...
+      Its terrifying, we have ukraine, now israel, we also got iran and niger..
+  last_chatted: '2023-10-10'
   location: France
   message_count: 0
-  realName: null
+  realName: ''
   username: sam_mrtt
 - aspirations: null
   chatter_type: known
   first_chatted: '2023-06-30'
-  interaction_count: 0
-  journal: null
+  journal: []
   last_chatted: '2023-09-28'
   location: Canada
   message_count: 0
   realName: James (Hunter) Bjorkman
   username: qvvy
-- aspirations: null
+- aspirations: ''
   chatter_type: known
   first_chatted: '2023-04-14'
-  interaction_count: 0
-  journal: null
-  last_chatted: null
+  journal: ''
+  last_chatted: ''
   location: California
   message_count: 0
-  realName: null
+  realName: ''
   username: johnsannios
-- aspirations: null
+- aspirations: ''
   chatter_type: known
   first_chatted: '2022-06-01'
-  interaction_count: 0
-  journal: null
+  journal: []
   last_chatted: '2023-09-14'
   location: Brisbane
   message_count: 0
@@ -125,7 +128,6 @@ data:
 - aspirations: Working on a career in Counter Strike GO
   chatter_type: known
   first_chatted: '2023-03-01'
-  interaction_count: 0
   journal:
   - date: '2023-03-01'
     entry: Doing year 12, finishes end of 2023
@@ -139,42 +141,25 @@ data:
   message_count: 0
   realName: ''
   username: christian12wg
-- aspirations: null
+- aspirations: ''
   chatter_type: bot
-  first_chatted: null
-  interaction_count: 0
-  journal: null
-  last_chatted: null
-  location: null
+  journal: []
   message_count: 0
-  realName: null
   username: sery_bot
 - aspirations: null
   chatter_type: known
   first_chatted: '2023-03-10'
-  interaction_count: 0
-  journal: null
+  journal: []
   last_chatted: '2023-04-10'
   location: Brisbane
   message_count: 0
-  realName: null
+  realName: ''
   username: kiwismoot
-- aspirations: null
-  chatter_type: known
-  first_chatted: null
-  interaction_count: 0
-  journal: null
-  last_chatted: null
-  location: null
-  message_count: 0
-  realName: Eden
-  username: allistair10
 - aspirations: To get into the tech industry
   chatter_type: known
   first_chatted: '2023-03-01'
-  interaction_count: 0
-  journal: null
-  last_chatted: null
+  journal: []
+  last_chatted: '2023-03-01'
   location: New Zealand
   message_count: 0
   realName: Sophie
@@ -182,27 +167,24 @@ data:
 - aspirations: null
   chatter_type: known
   first_chatted: '2023-03-01'
-  interaction_count: 0
-  journal: null
-  last_chatted: '2023-03-01'
-  location: null
-  message_count: 0
-  realName: null
-  username: recklesspelican
-- aspirations: []
-  chatter_type: known
-  first_chatted: '2023-09-25'
-  interaction_count: []
   journal: []
-  last_chatted: '2023-10-02'
+  last_chatted: '2023-03-01'
   location: ''
   message_count: 0
   realName: ''
+  username: recklesspelican
+- aspirations: ''
+  chatter_type: known
+  first_chatted: '2023-09-25'
+  journal: []
+  last_chatted: '2023-10-10'
+  location: Brisbane
+  message_count: 0
+  realName: ''
   username: justinhennessy
-- aspirations: null
+- aspirations: ''
   chatter_type: known
   first_chatted: '2023-09-26'
-  interaction_count: 0
   journal:
   - date: '2023-09-26'
     entry: Dropped im right at the end of their first appearance, give them some love
@@ -210,14 +192,13 @@ data:
   last_chatted: '2023-09-26'
   location: ''
   message_count: 0
-  realName: null
+  realName: ''
   username: christeeess
 - aspirations: ''
   chatter_type: known
   first_chatted: '2023-09-28'
-  interaction_count: 0
   journal: []
-  last_chatted: ''
+  last_chatted: '2023-10-08'
   location: ''
   message_count: 0
   realName: ''
@@ -225,7 +206,6 @@ data:
 - aspirations: ''
   chatter_type: known
   first_chatted: '2023-09-28'
-  interaction_count: 0
   journal:
   - date: '2023-09-28'
     entry: 'Was invited by rahomo, "makr_plays: thats alright, rahomo told me to come
@@ -235,10 +215,9 @@ data:
   message_count: 0
   realName: ''
   username: makr_plays
-- aspirations: []
+- aspirations: ''
   chatter_type: bot
   first_chatted: '2023-10-02'
-  interaction_count: []
   journal: []
   last_chatted: '2023-10-02'
   location: ''
@@ -248,10 +227,31 @@ data:
 - aspirations: []
   chatter_type: bot
   first_chatted: '2023-10-02'
-  interaction_count: []
   journal: []
   last_chatted: '2023-10-02'
   location: ''
   message_count: 0
   realName: ''
   username: nightbot
+- chatter_type: bot
+  first_chatted: '2023-10-05'
+  journal: []
+  last_chatted: '2023-10-05'
+  message_count: 0
+  username: streamelements
+- chatter_type: known
+  first_chatted: '2023-10-10'
+  journal:
+  - date: '2023-10-10'
+    entry: They were strolling through Music streams and just stoppin by
+  last_chatted: '2023-10-10'
+  location: Finland
+  message_count: 0
+  username: konjakke
+- chatter_type: known
+  first_chatted: '2023-10-10'
+  journal: []
+  last_chatted: '2023-10-10'
+  location: Chicago
+  message_count: 0
+  username: jon_oakwood
